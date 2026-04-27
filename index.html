@@ -8,13 +8,13 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#05101e;--s0:#091829;--s1:#0d2035;--s2:#122640;--s3:#19304f;
-  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.13);
-  --amber:#f59e0b;--amber-l:#fcd34d;--amber-d:rgba(245,158,11,0.14);--amber-d2:rgba(245,158,11,0.06);
-  --cyan:#22d3ee;--cyan-d:rgba(34,211,238,0.10);
-  --green:#34d399;--red:#f87171;
-  --text:#e2e8f0;--muted:#64748b;--muted2:#94a3b8;
-  --radius:14px;--r-sm:9px;--shadow:0 12px 40px rgba(0,0,0,0.5);
+  --bg:#f4f6f9;--s0:#ffffff;--s1:#ffffff;--s2:#f1f5f9;--s3:#e2e8f0;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.12);
+  --amber:#d97706;--amber-l:#f59e0b;--amber-d:rgba(217,119,6,0.12);--amber-d2:rgba(217,119,6,0.06);
+  --cyan:#0891b2;--cyan-d:rgba(8,145,178,0.10);
+  --green:#059669;--red:#dc2626;
+  --text:#1e293b;--muted:#64748b;--muted2:#475569;
+  --radius:14px;--r-sm:9px;--shadow:0 12px 40px rgba(0,0,0,0.12);
   --font-d:'DM Serif Display',Georgia,serif;
   --font-b:'IBM Plex Sans',sans-serif;
   --font-m:'IBM Plex Mono',monospace;
@@ -22,8 +22,8 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:14px}
 body{font-family:var(--font-b);background:var(--bg);color:var(--text);min-height:100vh;
-  background-image:radial-gradient(ellipse 90% 60% at 10% -20%,rgba(34,211,238,0.04) 0%,transparent 60%),
-    radial-gradient(ellipse 70% 50% at 90% 110%,rgba(245,158,11,0.06) 0%,transparent 60%);
+  background-image:radial-gradient(ellipse 90% 60% at 10% -20%,rgba(8,145,178,0.05) 0%,transparent 60%),
+    radial-gradient(ellipse 70% 50% at 90% 110%,rgba(217,119,6,0.06) 0%,transparent 60%);
   -webkit-font-smoothing:antialiased;}
 button{cursor:pointer;font-family:var(--font-b)}
 input,select{font-family:var(--font-b)}
@@ -82,8 +82,8 @@ input,select{font-family:var(--font-b)}
 /* ── MAIN APP ── */
 #s-app{display:none}
 #s-app.active{display:flex;flex-direction:column;min-height:100vh}
-.app-header{background:var(--s0);border-bottom:1px solid var(--border);padding:0 28px;
-  position:sticky;top:0;z-index:200;backdrop-filter:blur(12px)}
+.app-header{background:rgba(255,255,255,0.92);border-bottom:1px solid var(--border);padding:0 28px;
+  position:sticky;top:0;z-index:200;backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,0.06)}
 .hdr-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;
   justify-content:space-between;height:62px}
 .hdr-logo{display:flex;align-items:center;gap:10px}
@@ -98,7 +98,7 @@ input,select{font-family:var(--font-b)}
 .hdr-emp-name small{font-size:11px;color:var(--muted);font-weight:400}
 .hdr-badge{font-size:11px;font-weight:600;background:var(--amber-d);color:var(--amber);
   border:1px solid rgba(245,158,11,0.25);padding:4px 10px;border-radius:20px;letter-spacing:0.3px}
-.stepper-bar{background:var(--s0);border-bottom:1px solid var(--border);padding:0 28px}
+.stepper-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px}
 .stepper{max-width:1240px;margin:0 auto;display:flex;align-items:center;padding:14px 0;gap:0;
   overflow-x:auto;scrollbar-width:none}
 .stepper::-webkit-scrollbar{display:none}
@@ -403,8 +403,8 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.15);cursor:gr
 .demo-banner{background:rgba(245,158,11,0.08);border-bottom:1px solid rgba(245,158,11,0.2);
   padding:8px 28px;font-size:12px;color:var(--amber);text-align:center}
 #toast{position:fixed;bottom:28px;left:50%;
-  transform:translateX(-50%) translateY(70px);background:var(--s2);border:1px solid var(--border2);
-  border-radius:10px;padding:12px 20px;font-size:13px;font-weight:500;color:var(--text);
+  transform:translateX(-50%) translateY(70px);background:#1e293b;border:1px solid rgba(255,255,255,0.1);
+  border-radius:10px;padding:12px 20px;font-size:13px;font-weight:500;color:#f8fafc;
   box-shadow:0 8px 32px rgba(0,0,0,0.5);
   transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1),opacity 0.3s;
   opacity:0;z-index:999;white-space:nowrap}
@@ -816,31 +816,31 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxM7HZ6Mf-rI7cK
 const FLEXI_DEF = [
   { id:'meal',   name:'Meal / Food Allowance',       icon:'🍽️',
     old:true,  new:true,
-    slab:[0, 4000, 8800, 8800, 8800, 8800, 8800] },
+    slab:[0, 4000, 4000, 8800, 8800, 8800, 8800, 8800] },
   { id:'tele',   name:'Telecommunication & Data',    icon:'📱',
     old:true,  new:true,
-    slab:[0, 2000, 3000, 4000, 5000, 6000, 6000] },
+    slab:[0, 2000, 2000, 3000, 4000, 5000, 6000, 6000] },
   { id:'health', name:'Health & Wellness',            icon:'🏥',
     old:true,  new:true,
-    slab:[0, 5000, 10000, 14000, 18000, 20000, 20000] },
+    slab:[0, 5000, 5000, 10000, 14000, 18000, 20000, 20000] },
   { id:'fuel',   name:'Fuel Allowance',               icon:'⛽',
     old:true,  new:true,
-    slab:[0, 6000, 12000, 22000, 30000, 40000, 45000] },
+    slab:[0, 6000, 6000, 12000, 22000, 30000, 40000, 45000] },
   { id:'driver', name:'Driver Salary',                icon:'🚗',
     old:true,  new:true,
-    slab:[0, 0, 0, 10000, 15000, 20000, 25000] },
+    slab:[0, 0, 0, 0, 10000, 15000, 20000, 25000] },
   { id:'lta',    name:'Leave Travel Allowance (LTA)', icon:'✈️',
     old:true,  new:false,
-    slab:[0, 6000, 6000, 8000, 10000, 10000, 10000] },
+    slab:[0, 6000, 6000, 6000, 8000, 10000, 10000, 10000] },
   { id:'wear',   name:'Office Wear / Uniform',        icon:'👔',
     old:true,  new:false,
-    slab:[0, 3500, 3500, 5000, 6500, 8000, 8000] },
+    slab:[0, 3500, 3500, 3500, 5000, 6500, 8000, 8000] },
   { id:'books',  name:'Books & Periodicals',          icon:'📚',
     old:true,  new:false,
-    slab:[0, 3000, 3000, 4500, 5500, 6000, 6000] },
+    slab:[0, 3000, 3000, 3000, 4500, 5500, 6000, 6000] },
   { id:'lnd',    name:'Learning & Development',       icon:'🎓',
     old:true,  new:false,
-    slab:[0, 4000, 4000, 6000, 8000, 10000, 10000] },
+    slab:[0, 4000, 4000, 4000, 6000, 8000, 10000, 10000] },
 ];
 
 /* ═══════════════════════════════════════════════
@@ -932,15 +932,16 @@ function computeComponents(empData) {
 }
 
 function getSlabIdx(afp) {
-  if (afp < 1200000)  return 0;
-  if (afp < 1800000)  return 1;
-  if (afp < 2500000)  return 2;
-  if (afp < 3500000)  return 3;
-  if (afp < 5000000)  return 4;
-  if (afp < 7000000)  return 5;
-  return 6;
+  if (afp < 800000)   return 0;  // <8L
+  if (afp < 1200000)  return 1;  // 8-12L
+  if (afp < 1800000)  return 2;  // 12-18L
+  if (afp < 2500000)  return 3;  // 18-25L
+  if (afp < 3500000)  return 4;  // 25-35L
+  if (afp < 5000000)  return 5;  // 35-50L
+  if (afp < 7000000)  return 6;  // 50-70L
+  return 7;                       // 70L+
 }
-const SLAB_NAMES = ['<₹12L','₹12–18L','₹18–25L','₹25–35L','₹35–50L','₹50–70L','₹70L+'];
+const SLAB_NAMES = ['<₹8L','₹8–12L','₹12–18L','₹18–25L','₹25–35L','₹35–50L','₹50–70L','₹70L+'];
 
 /* ═══════════════════════════════════════════════
    TAX CALCULATION
