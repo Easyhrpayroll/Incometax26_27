@@ -543,7 +543,8 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.15);cursor:gr
             <div class="rc-label">Standard Deduction</div>
             <div class="rc-tags">
               <span class="rc-tag tag-allow">80C up to ₹1.5L</span>
-              <span class="rc-tag tag-allow">NPS 80CCD(1B)</span>
+              <span class="rc-tag tag-allow">Employee NPS 80CCD(1B)</span>
+              <span class="rc-tag tag-allow">Employer NPS 80CCD(2)</span>
               <span class="rc-tag tag-allow">HRA Exempt</span>
               <span class="rc-tag tag-allow">LTA Exempt</span>
               <span class="rc-tag tag-allow">80D Medical</span>
@@ -557,7 +558,8 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.15);cursor:gr
             <div class="rc-tags">
               <span class="rc-tag tag-allow">Lower tax rates</span>
               <span class="rc-tag tag-allow">Rebate up to ₹7L</span>
-              <span class="rc-tag tag-deny">No 80C / NPS</span>
+              <span class="rc-tag tag-allow">Employer NPS 80CCD(2)</span>
+              <span class="rc-tag tag-deny">No 80C / Employee NPS</span>
               <span class="rc-tag tag-deny">No HRA exempt</span>
             </div>
           </div>
@@ -591,12 +593,50 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.15);cursor:gr
         <!-- Budget warning -->
         <div class="budget-warn" id="budget-warn">
           ⚠️ <strong>Flexi Budget Exceeded</strong> — Your total Flexi selections
-          (<span id="bw-flexi">₹0</span>/mo) + NPS (<span id="bw-nps">₹0</span>/mo)
+          (<span id="bw-flexi">₹0</span>/mo) + Employer NPS (<span id="bw-nps">₹0</span>/mo)
           exceeds your Flexi Pay allowance of <span id="bw-pool">₹0</span>/mo.
           Please reduce your selections.
         </div>
 
         <div class="flexi-grid" id="flexi-grid"></div>
+
+        <!-- Employer NPS (80CCD(2)) — Flexi Pay deduction, both regimes -->
+        <div class="ded-card" id="emp-nps-card" style="margin-top:16px;border:1px solid rgba(34,211,238,0.2);background:rgba(8,145,178,0.03)">
+          <div class="ded-hd">
+            <div class="ded-hd-left">
+              <span class="ded-icon">🏛️</span>
+              <span class="ded-title">Employer NPS Contribution — 80CCD(2)</span>
+            </div>
+            <span class="card-hd-badge badge-both" style="font-size:10.5px;padding:2px 8px;margin-left:8px">Old &amp; New Regime</span>
+          </div>
+          <div class="info-note" style="margin-bottom:12px">
+            <strong>Employer NPS</strong> is deducted from your <strong>Flexi Pay balance</strong>. Max = 10% of Basic Salary, subject to the combined ₹7.5L cap (PF + NPS + superannuation). Available in <strong>both Old &amp; New Tax Regimes</strong> under Section 80CCD(2).
+          </div>
+          <div class="nps-toggle-row" onclick="toggleEmployerNPS()">
+            <div>
+              <label>Opt into Employer NPS?</label>
+              <small>Will be adjusted within your Flexi Pay balance. Cannot exceed available Flexi Pay.</small>
+            </div>
+            <button class="fi-toggle" id="emp-nps-toggle"></button>
+          </div>
+          <div id="emp-nps-slider-wrap" style="display:none">
+            <div class="fi-sl-header">
+              <span class="fi-sl-label">Annual Employer NPS Contribution</span>
+              <div class="fi-amount-box">
+                <span class="fi-currency">₹</span>
+                <input type="number" id="inp-emp-nps-amt" value="0" min="0" oninput="syncEmployerNPSSlider();calcAll()"/>
+              </div>
+            </div>
+            <input type="range" id="sl-emp-nps" min="0" max="50000" step="500" value="0" oninput="syncEmployerNPSInput();calcAll()"/>
+            <div class="fi-sl-meta"><span>₹0</span><span id="emp-nps-max-label">Max ₹0/yr</span></div>
+            <div class="nps-limit-note" id="emp-nps-limit-note">
+              Effective limit: <strong id="emp-nps-calc-limit">calculating…</strong> — lowest of:<br/>
+              10% of Basic (<strong id="emp-nps-10pct">—</strong>) &nbsp;·&nbsp;
+              Remaining Flexi Budget &nbsp;·&nbsp;
+              ₹7.5L PF+NPS cap (room: <strong id="emp-nps-pf-cap">—</strong>)
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- SECTION 4: DEDUCTIONS (Old Regime) -->
@@ -642,7 +682,7 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.15);cursor:gr
             <div class="nps-toggle-row" onclick="toggleNPS()">
               <div>
                 <label>Opt into NPS?</label>
-                <small>Employee contribution u/s 80CCD(1B) — max 10% of Basic or ₹50,000, whichever is lower</small>
+                <small>Section 80CCD(1B) — additional deduction up to ₹50,000/yr. Available <strong>only in Old Tax Regime</strong>. Does <em>not</em> affect your Flexi Pay.</small>
               </div>
               <button class="fi-toggle" id="nps-toggle"></button>
             </div>
@@ -655,10 +695,10 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.15);cursor:gr
                 </div>
               </div>
               <input type="range" id="sl-nps" min="0" max="50000" step="500" value="0" oninput="syncNPSInput();calcAll()"/>
-              <div class="fi-sl-meta"><span>₹0</span><span id="nps-max-label">Max ₹50,000/yr</span></div>
+              <div class="fi-sl-meta"><span>₹0</span><span id="nps-max-label">Max ₹0/yr</span></div>
               <div class="nps-limit-note" id="nps-limit-note">
-                Your NPS limit: <strong id="nps-calc-limit">calculating…</strong>
-                (lower of 10% of Basic <strong id="nps-10pct">—</strong> or ₹50,000)
+                Maximum deduction under Section 80CCD(1B): <strong>₹50,000/year</strong><br/>
+                This is <em>over and above</em> the ₹1.5L limit under 80C. Available only in Old Tax Regime.
               </div>
             </div>
           </div>
@@ -744,7 +784,8 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.15);cursor:gr
             <div class="sc-row"><span class="sc-row-label">Std. Deduction</span><span class="sc-row-val">-₹50,000</span></div>
             <div class="sc-row"><span class="sc-row-label">HRA Exempt</span><span class="sc-row-val" id="old-hra">—</span></div>
             <div class="sc-row"><span class="sc-row-label">Other Exempt</span><span class="sc-row-val" id="old-oex">—</span></div>
-            <div class="sc-row"><span class="sc-row-label">80C+NPS+80D+24B</span><span class="sc-row-val" id="old-ded">—</span></div>
+            <div class="sc-row"><span class="sc-row-label">80C+EmpNPS(1B)+80D+24B</span><span class="sc-row-val" id="old-ded">—</span></div>
+            <div class="sc-row"><span class="sc-row-label">Employer NPS 80CCD(2)</span><span class="sc-row-val green-num" id="old-emp-nps">—</span></div>
             <div class="sc-row sep-row"><span class="sc-row-label" style="font-weight:600;color:var(--muted2)">Taxable Income</span><span class="sc-row-val" id="old-taxable" style="color:var(--amber-l)">—</span></div>
             <div class="sc-row"><span class="sc-row-label">Income Tax</span><span class="sc-row-val tax-num" id="old-tax">—</span></div>
             <div class="sc-row"><span class="sc-row-label">Rebate 87A</span><span class="sc-row-val green-num" id="old-87a">—</span></div>
@@ -755,9 +796,9 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.15);cursor:gr
             <div class="sc-col-hd" style="color:var(--cyan)">⚡ New Regime</div>
             <div class="sc-row"><span class="sc-row-label">Gross Salary</span><span class="sc-row-val" id="new-gross">—</span></div>
             <div class="sc-row"><span class="sc-row-label">Std. Deduction</span><span class="sc-row-val">-₹75,000</span></div>
+            <div class="sc-row"><span class="sc-row-label">Employer NPS 80CCD(2)</span><span class="sc-row-val green-num" id="new-emp-nps">—</span></div>
             <div class="sc-row"><span class="sc-row-label">HRA Exempt</span><span class="sc-row-val">Nil</span></div>
-            <div class="sc-row"><span class="sc-row-label">Other Exempt</span><span class="sc-row-val">Nil</span></div>
-            <div class="sc-row"><span class="sc-row-label">80C+NPS+80D+24B</span><span class="sc-row-val">Nil</span></div>
+            <div class="sc-row"><span class="sc-row-label">Other Deductions</span><span class="sc-row-val">Nil</span></div>
             <div class="sc-row sep-row"><span class="sc-row-label" style="font-weight:600;color:var(--muted2)">Taxable Income</span><span class="sc-row-val" id="new-taxable" style="color:var(--cyan)">—</span></div>
             <div class="sc-row"><span class="sc-row-label">Income Tax</span><span class="sc-row-val tax-num" id="new-tax">—</span></div>
             <div class="sc-row"><span class="sc-row-label">Rebate 87A</span><span class="sc-row-val green-num" id="new-87a">—</span></div>
@@ -870,6 +911,8 @@ let S = {
   slabIdx: 0,
   npsOpt: false,
   flexi: {},
+  empNpsOpt: false,
+  empNpsAmt: 0,
   isDemo: false,
 };
 
@@ -946,8 +989,8 @@ const SLAB_NAMES = ['<₹8L','₹8–12L','₹12–18L','₹18–25L','₹25–3
 /* ═══════════════════════════════════════════════
    TAX CALCULATION
 ═══════════════════════════════════════════════ */
-function calcOldTax(gross, hraEx, otherEx, pfEmpE, extra80c, npsAmt, d80dSelf, d80dPar, loan24b) {
-  let taxable = gross - 50000 - hraEx - otherEx;
+function calcOldTax(gross, hraEx, otherEx, pfEmpE, extra80c, npsAmt, d80dSelf, d80dPar, loan24b, empNpsAmt) {
+  let taxable = gross - 50000 - hraEx - otherEx - (empNpsAmt||0);
   const total80c = Math.min(pfEmpE + (parseInt(extra80c)||0), 150000);
   const nps50k   = Math.min(parseInt(npsAmt)||0, 50000);
   taxable -= total80c;
@@ -965,8 +1008,8 @@ function calcOldTax(gross, hraEx, otherEx, pfEmpE, extra80c, npsAmt, d80dSelf, d
   return { taxable, base, rebate, cess, total: base + cess };
 }
 
-function calcNewTax(gross) {
-  const taxable = Math.max(0, gross - 75000);
+function calcNewTax(gross, empNpsAmt) {
+  const taxable = Math.max(0, gross - 75000 - (empNpsAmt||0));
   const slabs = [[0,300000,0],[300000,700000,0.05],[700000,1000000,0.10],
                  [1000000,1200000,0.15],[1200000,1500000,0.20],[1500000,Infinity,0.30]];
   let base = 0;
@@ -974,7 +1017,7 @@ function calcNewTax(gross) {
     if (taxable > lo) base += (Math.min(taxable,hi) - lo) * r;
   });
   let rebate = 0;
-  if (taxable <= 700000) { rebate = base; base = 0; }
+  if (taxable <= 1200000) { rebate = base; base = 0; }  // 87A rebate: zero tax up to ₹12L taxable income (FY 2026-27)
   const cess = base * 0.04;
   return { taxable, base, rebate, cess, total: base + cess };
 }
@@ -1057,6 +1100,7 @@ function initApp(empData, isDemo) {
   setRegime(S.regime);
   N('inp-pf-auto').value = S.comp.pfMo.toLocaleString('en-IN');  // monthly PF from sheet
   updateNPSLimit();
+  updateEmployerNPSLimit();
   showScreen('s-app');
   setStep(1);
   calcAll();
@@ -1126,25 +1170,97 @@ function updateChosenTag() {
 }
 
 /* ═══════════════════════════════════════════════
-   NPS LIMIT: 10% of Basic or ₹50,000, whichever lower
-   ALSO capped by remaining flexi budget
+   EMPLOYEE NPS LIMIT: flat ₹50,000 under Section 80CCD(1B)
+   Old Regime only. Does NOT come from Flexi Pay.
 ═══════════════════════════════════════════════ */
 function getNPSLimit() {
-  const basic10pct = Math.round(S.comp.basic * 0.10);
-  return Math.min(basic10pct, 50000);
+  return 50000;
 }
 function updateNPSLimit() {
-  const lim    = getNPSLimit();
-  const basic10 = Math.round(S.comp.basic * 0.10);
-  if (N('nps-max-label'))   N('nps-max-label').textContent   = `Max ${INR(lim)}/yr`;
-  if (N('nps-10pct'))       N('nps-10pct').textContent       = INR(basic10);
-  if (N('nps-calc-limit'))  N('nps-calc-limit').textContent  = INR(lim);
-  if (N('sl-nps'))          N('sl-nps').max = lim;
-  const cur = parseInt(N('inp-nps-amt')?.value)||0;
+  const lim = 50000; // 80CCD(1B) employee self-contribution cap
+  if (N('nps-max-label')) N('nps-max-label').textContent = `Max ${INR(lim)}/yr`;
+  if (N('sl-nps'))        { N('sl-nps').max = lim; N('sl-nps').step = 500; }
+  const cur = parseInt(N('inp-nps-amt')?.value) || 0;
   if (cur > lim && N('inp-nps-amt')) {
     N('inp-nps-amt').value = lim;
     if (N('sl-nps')) N('sl-nps').value = lim;
   }
+}
+
+/* ═══════════════════════════════════════════════
+   EMPLOYER NPS LIMIT — Section 80CCD(2)
+   10% of Basic, capped by remaining Flexi Pay and ₹7.5L combined rule.
+   Available in BOTH Old and New Tax Regime.
+   Deducted from Flexi Pay balance.
+═══════════════════════════════════════════════ */
+function getEmployerNPSLimit() {
+  // Rule 1: 10% of annual basic salary
+  const basic10pct = Math.round(S.comp.basic * 0.10);
+
+  // Rule 2: Remaining flexi budget after other flexi selections
+  const poolMo      = Math.round(S.comp.flexiA / 12);
+  const usedFlexiMo = FLEXI_DEF.reduce((sum, f) => {
+    const avail = S.regime === 'old' ? f.old : f.new;
+    return sum + (avail ? (S.flexi[f.id] || 0) : 0);
+  }, 0);
+  const remainFlexiAnnual = Math.max(0, (poolMo - usedFlexiMo) * 12);
+
+  // Rule 3: Combined PF + NPS + superannuation must not exceed ₹7,50,000/year
+  const totalPFAnnual = S.comp.pfMo * 24; // employee PF + employer PF
+  const maxFromPFCap  = Math.max(0, 750000 - totalPFAnnual);
+
+  return Math.min(basic10pct, remainFlexiAnnual, maxFromPFCap);
+}
+
+function updateEmployerNPSLimit() {
+  if (!S.comp) return;
+  const lim     = getEmployerNPSLimit();
+  const basic10 = Math.round(S.comp.basic * 0.10);
+  const totalPF = S.comp.pfMo * 24;
+  const pfCap   = Math.max(0, 750000 - totalPF);
+
+  if (N('emp-nps-max-label'))  N('emp-nps-max-label').textContent  = `Max ${INR(lim)}/yr`;
+  if (N('emp-nps-10pct'))      N('emp-nps-10pct').textContent      = INR(basic10);
+  if (N('emp-nps-calc-limit')) N('emp-nps-calc-limit').textContent = INR(lim);
+  if (N('emp-nps-pf-cap'))     N('emp-nps-pf-cap').textContent     = INR(pfCap);
+  if (N('sl-emp-nps'))         { N('sl-emp-nps').max = lim; N('sl-emp-nps').step = Math.max(100, Math.round(lim / 100)); }
+
+  const cur = parseInt(N('inp-emp-nps-amt')?.value) || 0;
+  if (cur > lim && N('inp-emp-nps-amt')) {
+    N('inp-emp-nps-amt').value = lim;
+    if (N('sl-emp-nps')) N('sl-emp-nps').value = lim;
+  }
+  S.empNpsAmt = Math.min(S.empNpsAmt, lim);
+}
+
+function toggleEmployerNPS() {
+  S.empNpsOpt = !S.empNpsOpt;
+  N('emp-nps-toggle').className = 'fi-toggle' + (S.empNpsOpt ? ' on' : '');
+  N('emp-nps-slider-wrap').style.display = S.empNpsOpt ? 'block' : 'none';
+  if (!S.empNpsOpt) {
+    N('inp-emp-nps-amt').value = 0;
+    N('sl-emp-nps').value = 0;
+    S.empNpsAmt = 0;
+  }
+  updateEmployerNPSLimit();
+  calcAll();
+}
+
+function syncEmployerNPSInput() {
+  const lim = getEmployerNPSLimit();
+  const v   = Math.min(parseInt(N('sl-emp-nps').value) || 0, lim);
+  N('inp-emp-nps-amt').value = v;
+  S.empNpsAmt = v;
+  updateSliderFill('sl-emp-nps', lim);
+}
+
+function syncEmployerNPSSlider() {
+  const lim = getEmployerNPSLimit();
+  const v   = Math.min(Math.max(parseInt(N('inp-emp-nps-amt').value) || 0, 0), lim);
+  N('inp-emp-nps-amt').value = v;
+  N('sl-emp-nps').value      = v;
+  S.empNpsAmt = v;
+  updateSliderFill('sl-emp-nps', lim);
 }
 
 /* ═══════════════════════════════════════════════
@@ -1232,6 +1348,8 @@ function onFlexiSelect(id) {
   if (el) {
     el.classList.toggle('enabled', val > 0);
   }
+  updateNPSLimit();  // recalculate NPS limit as flexi selections change
+  updateEmployerNPSLimit();  // employer NPS limit also changes with flexi selections
   calcAll();
   setStep(3);
 }
@@ -1276,7 +1394,8 @@ function setMetro(v) {
 
 /* ═══════════════════════════════════════════════
    BUDGET CONSTRAINT CHECK
-   Flexi selections + NPS/mo must NOT exceed Flexi Pay/mo
+   Flexi selections + Employer NPS/mo must NOT exceed Flexi Pay/mo.
+   NOTE: Employee NPS (80CCD(1B)) does NOT come from Flexi Pay.
 ═══════════════════════════════════════════════ */
 function getBudgetStatus() {
   const poolMo  = Math.round(S.comp.flexiA / 12);
@@ -1285,10 +1404,11 @@ function getBudgetStatus() {
     const avail = S.regime==='old' ? f.old : f.new;
     if (avail) totalFlexiMo += (S.flexi[f.id]||0);
   });
-  const npsMo = S.npsOpt ? Math.round((parseFloat(N('inp-nps-amt')?.value)||0) / 12) : 0;
-  const totalUsed = totalFlexiMo + npsMo;
-  const over = totalUsed > poolMo;
-  return { poolMo, totalFlexiMo, npsMo, totalUsed, over };
+  // Only Employer NPS (80CCD(2)) is deducted from Flexi Pay
+  const empNpsMo  = S.empNpsOpt ? Math.round((parseFloat(N('inp-emp-nps-amt')?.value)||0) / 12) : 0;
+  const totalUsed = totalFlexiMo + empNpsMo;
+  const over      = totalUsed > poolMo;
+  return { poolMo, totalFlexiMo, empNpsMo, totalUsed, over };
 }
 
 /* ═══════════════════════════════════════════════
@@ -1305,14 +1425,14 @@ function calcAll() {
   if (budget.over) {
     warn.classList.add('show');
     N('bw-flexi').textContent = INR(budget.totalFlexiMo)+'/mo';
-    N('bw-nps').textContent   = INR(budget.npsMo)+'/mo';
+    N('bw-nps').textContent   = INR(budget.empNpsMo)+'/mo';
     N('bw-pool').textContent  = INR(budget.poolMo)+'/mo';
   } else {
     warn.classList.remove('show');
   }
 
-  // Pool bar
-  updatePoolBar(budget.totalFlexiMo, budget.poolMo);
+  // Pool bar — includes Employer NPS since it's from Flexi Pay
+  updatePoolBar(budget.totalUsed, budget.poolMo);
 
   // Old regime flexi exempt (annual)
   let oldFlexiExempt = 0;
@@ -1325,6 +1445,7 @@ function calcAll() {
   if (N('hra-exempt-disp')) N('hra-exempt-disp').textContent = INR(hraEx);
 
   const npsAmt   = S.npsOpt ? Math.min(parseFloat(N('inp-nps-amt')?.value)||0, getNPSLimit()) : 0;
+  const empNpsAmt = S.empNpsOpt ? Math.min(parseFloat(N('inp-emp-nps-amt')?.value)||0, getEmployerNPSLimit()) : 0;
   const extra80c = parseFloat(N('inp-80c')?.value)||0;
   const d80dS    = parseFloat(N('inp-80d-self')?.value)||0;
   const d80dP    = parseFloat(N('inp-80d-par')?.value)||0;
@@ -1336,8 +1457,11 @@ function calcAll() {
   if (N('hint-80c'))  N('hint-80c').textContent = INR(rem80c);
   if (N('m-80c'))     N('m-80c').style.width = Math.min((used80c/150000)*100,100)+'%';
 
-  const OLD = calcOldTax(gross, hraEx, oldFlexiExempt, c.pfEmpE, extra80c, npsAmt, d80dS, d80dP, loan24b);
-  const NEW = calcNewTax(gross);
+  // Employer NPS limit update
+  updateEmployerNPSLimit();
+
+  const OLD = calcOldTax(gross, hraEx, oldFlexiExempt, c.pfEmpE, extra80c, npsAmt, d80dS, d80dP, loan24b, empNpsAmt);
+  const NEW = calcNewTax(gross, empNpsAmt);
 
   // Summary panel
   N('old-gross').textContent     = INR(gross);
@@ -1345,6 +1469,7 @@ function calcAll() {
   N('old-oex').textContent       = oldFlexiExempt>0 ? `−${INR(oldFlexiExempt)}` : '—';
   const totalDed = Math.min(c.pfEmpE+extra80c,150000)+Math.min(npsAmt,50000)+Math.min(d80dS,25000)+Math.min(d80dP,50000)+loan24b;
   N('old-ded').textContent       = totalDed>0 ? `−${INR(totalDed)}`    : '—';
+  if (N('old-emp-nps')) N('old-emp-nps').textContent = empNpsAmt>0 ? `−${INR(empNpsAmt)}` : '—';
   N('old-taxable').textContent   = INR(OLD.taxable);
   N('old-tax').textContent       = OLD.base>0  ? INR(OLD.base)          : '—';
   N('old-87a').textContent       = OLD.rebate>0? `−${INR(OLD.rebate)}`  : '—';
@@ -1352,6 +1477,7 @@ function calcAll() {
   N('old-total-tax').textContent = INR(OLD.total);
 
   N('new-gross').textContent     = INR(gross);
+  if (N('new-emp-nps')) N('new-emp-nps').textContent = empNpsAmt>0 ? `−${INR(empNpsAmt)}` : '—';
   N('new-taxable').textContent   = INR(NEW.taxable);
   N('new-tax').textContent       = NEW.base>0  ? INR(NEW.base)          : '—';
   N('new-87a').textContent       = NEW.rebate>0? `−${INR(NEW.rebate)}`  : '—';
@@ -1403,6 +1529,7 @@ async function submitPlan() {
   const rent    = parseFloat(N('inp-rent')?.value)||0;
   const hraEx   = S.regime==='old' ? calcHRA(c.hra, c.basic, rent, S.isMetro) : 0;
   const npsAmt  = S.npsOpt ? Math.min(parseFloat(N('inp-nps-amt')?.value)||0, getNPSLimit()) : 0;
+  const empNpsAmt = S.empNpsOpt ? Math.min(parseFloat(N('inp-emp-nps-amt')?.value)||0, getEmployerNPSLimit()) : 0;
   const extra80c= parseFloat(N('inp-80c')?.value)||0;
   const d80dS   = parseFloat(N('inp-80d-self')?.value)||0;
   const d80dP   = parseFloat(N('inp-80d-par')?.value)||0;
@@ -1410,13 +1537,13 @@ async function submitPlan() {
   let oldFlexiExempt = 0;
   FLEXI_DEF.forEach(f => { if (f.old) oldFlexiExempt += ((S.flexi[f.id]||0)*12); });
 
-  const OLD = calcOldTax(gross, hraEx, oldFlexiExempt, c.pfEmpE, extra80c, npsAmt, d80dS, d80dP, loan24b);
-  const NEW = calcNewTax(gross);
+  const OLD = calcOldTax(gross, hraEx, oldFlexiExempt, c.pfEmpE, extra80c, npsAmt, d80dS, d80dP, loan24b, empNpsAmt);
+  const NEW = calcNewTax(gross, empNpsAmt);
   const chosenTax = S.regime==='old' ? OLD.total : NEW.total;
 
   const payload = {
     code:S.emp.code, name:S.emp.name, afp:S.emp.afp,
-    regime:S.regime, flexi:S.flexi, nps:npsAmt,
+    regime:S.regime, flexi:S.flexi, nps:npsAmt, empNps:empNpsAmt,
     extra80c, d80dSelf:d80dS, d80dParent:d80dP, loan24b,
     hraExempt:hraEx, rent, isMetro:S.isMetro,
     oldTax:OLD.total, newTax:NEW.total,
@@ -1480,14 +1607,22 @@ function downloadPDF() {
     fuel:'Fuel', driver:'Driver Salary', lta:'LTA',
     wear:'Office Wear', books:'Books & Periodicals', lnd:'Learning & Dev'
   };
-  const flexiRows = Object.entries(FLEXI_LABELS)
-    .filter(([k]) => (flexi[k]||0) > 0)
-    .map(([k,label]) => `
-      <tr>
-        <td>${label}</td>
-        <td style="text-align:right">${INR(flexi[k])}/mo</td>
-        <td style="text-align:right">${INR(flexi[k]*12)}/yr</td>
-      </tr>`).join('');
+  const flexiRows = [
+    ...Object.entries(FLEXI_LABELS)
+      .filter(([k]) => (flexi[k]||0) > 0)
+      .map(([k,label]) => `
+        <tr>
+          <td>${label}</td>
+          <td style="text-align:right">${INR(flexi[k])}/mo</td>
+          <td style="text-align:right">${INR(flexi[k]*12)}/yr</td>
+        </tr>`),
+    ...(p.empNps > 0 ? [`
+        <tr>
+          <td>Employer NPS — 80CCD(2)</td>
+          <td style="text-align:right">${INR(p.empNps/12)}/mo</td>
+          <td style="text-align:right">${INR(p.empNps)}/yr</td>
+        </tr>`] : [])
+  ].join('');
 
   const html = `<!DOCTYPE html>
 <html>
@@ -1593,7 +1728,8 @@ ${p.regime==='old' ? `<div class="section">
     <tbody>
       <tr><td>Standard Deduction</td><td style="text-align:right">₹50,000</td></tr>
       ${p.hraExempt>0?`<tr><td>HRA Exemption</td><td style="text-align:right">${INR(p.hraExempt)}</td></tr>`:''}
-      ${(p.nps||0)>0?`<tr><td>NPS 80CCD(1B)</td><td style="text-align:right">${INR(p.nps)}</td></tr>`:''}
+      ${(p.nps||0)>0?`<tr><td>Employee NPS — 80CCD(1B)</td><td style="text-align:right">${INR(p.nps)}</td></tr>`:''}
+      ${(p.empNps||0)>0?`<tr><td>Employer NPS — 80CCD(2)</td><td style="text-align:right">${INR(p.empNps)}</td></tr>`:''}
       ${(p.extra80c||0)>0?`<tr><td>80C (ELSS/PPF/LIC etc.)</td><td style="text-align:right">${INR(p.extra80c)}</td></tr>`:''}
       ${(p.d80dSelf||0)>0?`<tr><td>80D – Self/Family Health</td><td style="text-align:right">${INR(p.d80dSelf)}</td></tr>`:''}
       ${(p.d80dParent||0)>0?`<tr><td>80D – Parents Health</td><td style="text-align:right">${INR(p.d80dParent)}</td></tr>`:''}
