@@ -113,8 +113,8 @@ input,select{font-family:var(--font-b)}
 .step-item.active .step-label{color:var(--text)}
 .step-item.done .step-label{color:var(--amber)}
 .step-sep{width:32px;height:1px;background:var(--border2);margin:0 6px;flex-shrink:0}
-.app-body{flex:1;max-width:1240px;width:100%;margin:0 auto;padding:28px 28px 60px;
-  display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start}
+.app-body{flex:1;max-width:1280px;width:100%;margin:0 auto;padding:28px 28px 60px;
+  display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:start}
 .app-left{display:flex;flex-direction:column;gap:20px}
 .app-right{position:sticky;top:88px;display:flex;flex-direction:column;gap:16px}
 
@@ -298,41 +298,53 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.15);cursor:gr
 
 /* ── TAX SUMMARY (RIGHT) ── */
 .summary-card{background:var(--s1);border:1px solid var(--border2);border-radius:var(--radius);
-  overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.10)}
-.sc-header{padding:18px 20px 14px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between}
+  overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08)}
+.sc-header{padding:16px 20px 0;border-bottom:none;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .sc-title{font-family:var(--font-d);font-size:16px;color:var(--text)}
-.sc-fy{font-size:11px;color:var(--muted)}
-.sc-cols{display:grid;grid-template-columns:1fr 1fr}
-.sc-col{padding:14px 16px;border-right:1px solid var(--border);transition:background 0.3s}
-.sc-col:last-child{border-right:none}
-.sc-col.highlighted-old{background:rgba(245,158,11,0.06)}
-.sc-col.highlighted-new{background:rgba(34,211,238,0.04)}
-.sc-col-hd{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;
-  margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);color:var(--muted)}
-.sc-col.highlighted-old .sc-col-hd{color:var(--amber)}
-.sc-col.highlighted-new .sc-col-hd{color:var(--cyan)}
-.sc-row{display:flex;justify-content:space-between;align-items:baseline;
-  margin-bottom:6px;font-size:11.5px;gap:6px}
-.sc-row-label{color:var(--muted2);line-height:1.4;flex-shrink:0;max-width:55%}
-.sc-row-val{font-family:var(--font-m);font-size:11px;color:var(--text);font-weight:600;
-  white-space:nowrap;text-align:right}
-.sc-row.sep-row{border-top:1px solid var(--border);padding-top:8px;margin-top:8px;margin-bottom:8px}
+.sc-fy{font-size:11px;color:var(--muted);background:var(--s2);padding:3px 8px;border-radius:20px}
+
+/* Tab switcher */
+.sc-tabs{display:flex;gap:0;padding:14px 20px 0;border-bottom:2px solid var(--border)}
+.sc-tab{flex:1;padding:8px 12px;font-size:12px;font-weight:600;text-align:center;
+  border:none;background:none;cursor:pointer;color:var(--muted);
+  border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.2s;
+  font-family:var(--font-b)}
+.sc-tab.active-old{color:var(--amber);border-bottom-color:var(--amber)}
+.sc-tab.active-new{color:var(--cyan);border-bottom-color:var(--cyan)}
+.sc-tab:hover:not(.active-old):not(.active-new){color:var(--text)}
+
+/* Tab panels */
+.sc-panel{display:none;padding:14px 20px}
+.sc-panel.visible{display:block}
+.sc-row{display:flex;justify-content:space-between;align-items:center;
+  padding:6px 0;font-size:12.5px;border-bottom:1px solid var(--border)}
+.sc-row:last-child{border-bottom:none}
+.sc-row-label{color:var(--muted2);font-weight:500}
+.sc-row-val{font-family:var(--font-m);font-size:12px;color:var(--text);font-weight:600;
+  text-align:right}
+.sc-row.sep-row{border-top:2px solid var(--border);margin-top:4px;padding-top:8px;border-bottom:1px solid var(--border)}
+.sc-row.total-row{background:var(--s2);margin:0 -20px;padding:8px 20px;
+  border-top:2px solid var(--border);border-bottom:none;margin-top:4px}
 .sc-row-val.tax-num{color:var(--red);font-weight:700}
 .sc-row-val.green-num{color:var(--green);font-weight:600}
-.sc-tds{padding:14px 16px;border-top:2px solid var(--border);background:var(--s2)}
-.sc-tds-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.sc-tds-row:last-child{margin-bottom:0}
-.sc-tds-label{font-size:11.5px;color:var(--muted2);font-weight:500}
-.sc-tds-val{font-family:var(--font-m);font-size:14px;font-weight:700}
-.sc-tds-val.amber{color:var(--amber)}
-.sc-tds-val.cyan{color:var(--cyan)}
-.sc-best{padding:12px 16px;border-top:1px solid var(--border);
+.sc-row-val.big-num{font-size:14px;font-weight:700}
+
+/* Comparison bar at bottom */
+.sc-compare{padding:14px 20px;border-top:2px solid var(--border);background:var(--s2)}
+.sc-compare-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.sc-compare-row:last-child{margin-bottom:0}
+.sc-compare-label{font-size:11.5px;color:var(--muted2);font-weight:500}
+.sc-compare-val{font-family:var(--font-m);font-size:13px;font-weight:700}
+.sc-compare-val.amber{color:var(--amber)}
+.sc-compare-val.cyan{color:var(--cyan)}
+.sc-compare-val.green{color:var(--green)}
+.sc-best{padding:12px 20px;border-top:1px solid var(--border);
   display:flex;align-items:center;justify-content:space-between;background:rgba(52,211,153,0.07)}
 .sc-best-label{font-size:11.5px;color:var(--muted2);font-weight:500}
 .sc-best-val{font-size:12px;font-weight:700}
-.sc-saving{padding:12px 16px;border-top:1px solid var(--border);font-size:12px;
-  color:var(--muted2);line-height:1.6;background:var(--s1)}
+.sc-saving{padding:10px 20px;border-top:1px solid var(--border);font-size:12px;
+  color:var(--muted2);line-height:1.6;background:var(--s1);text-align:center}
 .sc-saving strong{color:var(--green)}
 
 /* ── FINALIZE ── */
@@ -777,45 +789,58 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.15);cursor:gr
           <span class="sc-title">Tax Comparison</span>
           <span class="sc-fy">FY 2026–27</span>
         </div>
-        <div class="sc-cols">
-          <div class="sc-col" id="sc-old">
-            <div class="sc-col-hd">🏛 Old Regime</div>
-            <div class="sc-row"><span class="sc-row-label">Gross Salary</span><span class="sc-row-val" id="old-gross">—</span></div>
-            <div class="sc-row"><span class="sc-row-label">Std. Deduction</span><span class="sc-row-val green-num">−₹50,000</span></div>
-            <div class="sc-row"><span class="sc-row-label">HRA Exempt</span><span class="sc-row-val green-num" id="old-hra">—</span></div>
-            <div class="sc-row"><span class="sc-row-label">Flexi Exempt</span><span class="sc-row-val green-num" id="old-oex">—</span></div>
-            <div class="sc-row"><span class="sc-row-label">80C+NPS(1B)+80D+24B</span><span class="sc-row-val green-num" id="old-ded">—</span></div>
-            <div class="sc-row"><span class="sc-row-label">Emp.NPS 80CCD(2)</span><span class="sc-row-val green-num" id="old-emp-nps">—</span></div>
-            <div class="sc-row sep-row"><span class="sc-row-label" style="font-weight:700;color:var(--text)">Taxable Income</span><span class="sc-row-val" id="old-taxable" style="color:var(--amber);font-size:12px;font-weight:700">—</span></div>
-            <div class="sc-row"><span class="sc-row-label">Income Tax</span><span class="sc-row-val tax-num" id="old-tax">—</span></div>
-            <div class="sc-row"><span class="sc-row-label">Rebate 87A</span><span class="sc-row-val green-num" id="old-87a">—</span></div>
-            <div class="sc-row"><span class="sc-row-label">Cess @4%</span><span class="sc-row-val tax-num" id="old-cess">—</span></div>
-            <div class="sc-row sep-row"><span class="sc-row-label" style="font-weight:700;color:var(--text)">Total Tax</span><span class="sc-row-val tax-num" id="old-total-tax" style="font-size:13px">—</span></div>
+
+        <!-- Tab buttons -->
+        <div class="sc-tabs">
+          <button class="sc-tab active-old" id="tab-old" onclick="switchTab('old')">🏛️ Old Regime</button>
+          <button class="sc-tab" id="tab-new" onclick="switchTab('new')">⚡ New Regime</button>
+        </div>
+
+        <!-- Old Regime Panel -->
+        <div class="sc-panel visible" id="sc-old">
+          <div class="sc-row"><span class="sc-row-label">Gross Salary</span><span class="sc-row-val" id="old-gross">—</span></div>
+          <div class="sc-row"><span class="sc-row-label">Std. Deduction</span><span class="sc-row-val green-num">−₹50,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">HRA Exemption</span><span class="sc-row-val green-num" id="old-hra">—</span></div>
+          <div class="sc-row"><span class="sc-row-label">Flexi Exemptions</span><span class="sc-row-val green-num" id="old-oex">—</span></div>
+          <div class="sc-row"><span class="sc-row-label">80C + NPS(1B) + 80D + 24B</span><span class="sc-row-val green-num" id="old-ded">—</span></div>
+          <div class="sc-row"><span class="sc-row-label">Employer NPS 80CCD(2)</span><span class="sc-row-val green-num" id="old-emp-nps">—</span></div>
+          <div class="sc-row sep-row"><span class="sc-row-label" style="font-weight:700;color:var(--text)">Taxable Income</span><span class="sc-row-val" id="old-taxable" style="color:var(--amber);font-weight:700;font-size:13px">—</span></div>
+          <div class="sc-row"><span class="sc-row-label">Income Tax</span><span class="sc-row-val tax-num" id="old-tax">—</span></div>
+          <div class="sc-row"><span class="sc-row-label">Rebate u/s 87A</span><span class="sc-row-val green-num" id="old-87a">—</span></div>
+          <div class="sc-row"><span class="sc-row-label">Health & Ed. Cess @4%</span><span class="sc-row-val tax-num" id="old-cess">—</span></div>
+          <div class="sc-row total-row"><span class="sc-row-label" style="font-weight:700;color:var(--text)">Total Annual Tax</span><span class="sc-row-val tax-num big-num" id="old-total-tax">—</span></div>
+        </div>
+
+        <!-- New Regime Panel -->
+        <div class="sc-panel" id="sc-new">
+          <div class="sc-row"><span class="sc-row-label">Gross Salary</span><span class="sc-row-val" id="new-gross">—</span></div>
+          <div class="sc-row"><span class="sc-row-label">Std. Deduction</span><span class="sc-row-val green-num">−₹75,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Employer NPS 80CCD(2)</span><span class="sc-row-val green-num" id="new-emp-nps">—</span></div>
+          <div class="sc-row"><span class="sc-row-label">HRA Exemption</span><span class="sc-row-val" style="color:var(--muted)">Not applicable</span></div>
+          <div class="sc-row"><span class="sc-row-label">Other Deductions</span><span class="sc-row-val" style="color:var(--muted)">Not applicable</span></div>
+          <div class="sc-row sep-row"><span class="sc-row-label" style="font-weight:700;color:var(--text)">Taxable Income</span><span class="sc-row-val" id="new-taxable" style="color:var(--cyan);font-weight:700;font-size:13px">—</span></div>
+          <div class="sc-row"><span class="sc-row-label">Income Tax</span><span class="sc-row-val tax-num" id="new-tax">—</span></div>
+          <div class="sc-row"><span class="sc-row-label">Rebate u/s 87A</span><span class="sc-row-val green-num" id="new-87a">—</span></div>
+          <div class="sc-row"><span class="sc-row-label">Health & Ed. Cess @4%</span><span class="sc-row-val tax-num" id="new-cess">—</span></div>
+          <div class="sc-row total-row"><span class="sc-row-label" style="font-weight:700;color:var(--text)">Total Annual Tax</span><span class="sc-row-val tax-num big-num" id="new-total-tax">—</span></div>
+        </div>
+
+        <!-- Comparison summary -->
+        <div class="sc-compare">
+          <div class="sc-compare-row"><span class="sc-compare-label">🏛️ Old — Monthly TDS</span><span class="sc-compare-val amber" id="sc-tds-old">₹0</span></div>
+          <div class="sc-compare-row"><span class="sc-compare-label">⚡ New — Monthly TDS</span><span class="sc-compare-val cyan" id="sc-tds-new">₹0</span></div>
+          <div class="sc-compare-row" style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">
+            <span class="sc-compare-label" style="color:var(--green)">🏛️ Old — Monthly In-Hand</span>
+            <span class="sc-compare-val green" id="sc-inhand-old">—</span>
           </div>
-          <div class="sc-col" id="sc-new">
-            <div class="sc-col-hd" style="color:var(--cyan)">⚡ New Regime</div>
-            <div class="sc-row"><span class="sc-row-label">Gross Salary</span><span class="sc-row-val" id="new-gross">—</span></div>
-            <div class="sc-row"><span class="sc-row-label">Std. Deduction</span><span class="sc-row-val green-num">−₹75,000</span></div>
-            <div class="sc-row"><span class="sc-row-label">Emp.NPS 80CCD(2)</span><span class="sc-row-val green-num" id="new-emp-nps">—</span></div>
-            <div class="sc-row"><span class="sc-row-label">HRA Exempt</span><span class="sc-row-val" style="color:var(--muted)">Nil</span></div>
-            <div class="sc-row"><span class="sc-row-label">Other Deductions</span><span class="sc-row-val" style="color:var(--muted)">Nil</span></div>
-            <div class="sc-row sep-row"><span class="sc-row-label" style="font-weight:700;color:var(--text)">Taxable Income</span><span class="sc-row-val" id="new-taxable" style="color:var(--cyan);font-size:12px;font-weight:700">—</span></div>
-            <div class="sc-row"><span class="sc-row-label">Income Tax</span><span class="sc-row-val tax-num" id="new-tax">—</span></div>
-            <div class="sc-row"><span class="sc-row-label">Rebate 87A</span><span class="sc-row-val green-num" id="new-87a">—</span></div>
-            <div class="sc-row"><span class="sc-row-label">Cess @4%</span><span class="sc-row-val tax-num" id="new-cess">—</span></div>
-            <div class="sc-row sep-row"><span class="sc-row-label" style="font-weight:700;color:var(--text)">Total Tax</span><span class="sc-row-val tax-num" id="new-total-tax" style="font-size:13px">—</span></div>
+          <div class="sc-compare-row">
+            <span class="sc-compare-label" style="color:var(--green)">⚡ New — Monthly In-Hand</span>
+            <span class="sc-compare-val green" id="sc-inhand-new">—</span>
           </div>
         </div>
-        <div class="sc-tds">
-          <div class="sc-tds-row"><span class="sc-tds-label">Old Regime — Monthly TDS</span><span class="sc-tds-val amber" id="sc-tds-old">₹0</span></div>
-          <div class="sc-tds-row"><span class="sc-tds-label">New Regime — Monthly TDS</span><span class="sc-tds-val cyan" id="sc-tds-new">₹0</span></div>
-          <div style="margin-top:10px;border-top:1px solid var(--border);padding-top:10px">
-            <div class="sc-tds-row"><span class="sc-tds-label" style="color:var(--green)">Old — Monthly In-Hand</span><span class="sc-tds-val" style="color:var(--green);font-size:13px" id="sc-inhand-old">—</span></div>
-            <div class="sc-tds-row"><span class="sc-tds-label" style="color:var(--green)">New — Monthly In-Hand</span><span class="sc-tds-val" style="color:var(--green);font-size:13px" id="sc-inhand-new">—</span></div>
-          </div>
-        </div>
+
         <div class="sc-best">
-          <span class="sc-best-label">Recommended Regime</span>
+          <span class="sc-best-label">💡 Recommended Regime</span>
           <span class="sc-best-val" id="sc-best-opt">—</span>
         </div>
         <div class="sc-saving" id="sc-saving"></div>
@@ -1537,11 +1562,11 @@ function calcAll() {
   N('sc-best-opt').textContent = bestIsNew ? '⚡ New Regime' : '🏛️ Old Regime';
   N('sc-best-opt').style.color = bestIsNew ? 'var(--cyan)' : 'var(--amber)';
   N('sc-saving').innerHTML     = saving>0
-    ? `Choosing <strong>${bestIsNew?'New':'Old'} Regime</strong> saves you <strong>${INR(saving)}/year</strong> (${INR(saving/12)}/month)`
-    : 'Both regimes result in the same tax liability.';
+    ? `Choosing <strong>${bestIsNew?'New':'Old'} Regime</strong> saves <strong>${INR(saving)}/yr</strong> (${INR(saving/12)}/mo)`
+    : 'Both regimes result in the same tax.';
 
-  N('sc-old').className = 'sc-col' + (S.regime==='old'?' highlighted-old':'');
-  N('sc-new').className = 'sc-col' + (S.regime==='new'?' highlighted-new':'');
+  // Switch active tab to the chosen regime
+  switchTab(S.regime);
 
   // Disable submit if over budget
   const finBtn = N('btn-finalize');
@@ -1560,6 +1585,19 @@ function updatePoolBar(used, total) {
   fill.style.width = pct+'%';
   fill.className   = 'pool-fill' + (used>total?' over':'');
   N('pool-pct').style.color = used>total ? 'var(--red)' : '';
+}
+
+/* ═══════════════════════════════════════════════
+   TAB SWITCHER (Tax Comparison Panel)
+═══════════════════════════════════════════════ */
+function switchTab(regime) {
+  const isOld = regime === 'old';
+  // Panels
+  N('sc-old').className = 'sc-panel' + (isOld ? ' visible' : '');
+  N('sc-new').className = 'sc-panel' + (!isOld ? ' visible' : '');
+  // Tab buttons
+  N('tab-old').className = 'sc-tab' + (isOld ? ' active-old' : '');
+  N('tab-new').className = 'sc-tab' + (!isOld ? ' active-new' : '');
 }
 
 /* ═══════════════════════════════════════════════
