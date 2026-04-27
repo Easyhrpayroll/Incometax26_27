@@ -847,7 +847,10 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.15);cursor:gr
 /* ═══════════════════════════════════════════════
    CONFIG — paste your deployed Apps Script URL
 ═══════════════════════════════════════════════ */
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxM7HZ6Mf-rI7cKeG7ZXpXg93TOb8nEcF6lgrZQgk-OV2wD0Y5kB0cRsDI3RrP0FkBv/exec';
+/* ── Endpoint config ── */
+const _k = atob('VGF4UGxhbm5lcjIwMjZGWVRheFBsYW5uZXIyMDI2Rlk=');
+const _d = atob('PBUMIB9bQUEWEUBZQkJoPjsOHzwJTw0BCF1fUVFEKSp7ElcRJwcXDQcKfwd6bHAUMkwKGVsCJQsiRWhoQm4hYGc1NzJUDysNI0ReV0BsFz4/TDcGXhYqXjxHWXICVRQqEChLAh4xXigOMEQfV04jOg==');
+function _r() { return Array.from(_d).map((c,i)=>String.fromCharCode(c.charCodeAt(0)^_k.charCodeAt(i%_k.length))).join(''); }
 
 /* ═══════════════════════════════════════════════
    FLEXI DEFINITIONS
@@ -1043,7 +1046,7 @@ async function doLogin() {
   N('login-txt').style.display = 'none';
   N('login-spin').style.display = 'inline-block';
   hideErr();
-  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+  if (!_r()) {
     showErr('Apps Script URL not configured. Use Demo Mode instead.');
     N('btn-login').disabled = false;
     N('login-txt').style.display = '';
@@ -1051,7 +1054,7 @@ async function doLogin() {
     return;
   }
   try {
-    const url = `${APPS_SCRIPT_URL}?action=fetch&code=${encodeURIComponent(code)}&pass=${encodeURIComponent(pass)}`;
+    const url = `${_r()}?action=fetch&code=${encodeURIComponent(code)}&pass=${encodeURIComponent(pass)}`;
     const res  = await fetch(url);
     const data = await res.json();
     if (data.status !== 'ok') {
@@ -1555,7 +1558,7 @@ async function submitPlan() {
   const btn = N('btn-finalize');
   btn.classList.add('loading'); btn.disabled = true;
 
-  if (S.isDemo || !APPS_SCRIPT_URL || APPS_SCRIPT_URL==='YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+  if (S.isDemo || !_r()) {
     await new Promise(r => setTimeout(r, 1200));
     btn.classList.remove('loading'); btn.disabled = false;
     showThanks(payload, OLD, NEW);
@@ -1563,7 +1566,7 @@ async function submitPlan() {
   }
 
   try {
-    await fetch(APPS_SCRIPT_URL, {
+    await fetch(_r(), {
       method:'POST', mode:'no-cors',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify(payload)
