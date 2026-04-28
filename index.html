@@ -816,8 +816,8 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.15);cursor:gr
           <div class="sc-row"><span class="sc-row-label">Gross Salary</span><span class="sc-row-val" id="new-gross">—</span></div>
           <div class="sc-row"><span class="sc-row-label">Std. Deduction</span><span class="sc-row-val green-num">−₹75,000</span></div>
           <div class="sc-row"><span class="sc-row-label">Employer NPS 80CCD(2)</span><span class="sc-row-val green-num" id="new-emp-nps">—</span></div>
-          <div class="sc-row"><span class="sc-row-label">HRA Exemption</span><span class="sc-row-val" style="color:var(--muted)">Not applicable</span></div>
-          <div class="sc-row"><span class="sc-row-label">Other Deductions</span><span class="sc-row-val" style="color:var(--muted)">Not applicable</span></div>
+          <div class="sc-row"><span class="sc-row-label">Flexi Exempt (Meal etc.)</span><span class="sc-row-val green-num" id="new-oex">—</span></div>
+          <div class="sc-row"><span class="sc-row-label">HRA / Other Deductions</span><span class="sc-row-val" style="color:var(--muted)">Not applicable</span></div>
           <div class="sc-row sep-row"><span class="sc-row-label" style="font-weight:700;color:var(--text)">Taxable Income</span><span class="sc-row-val" id="new-taxable" style="color:var(--cyan);font-weight:700;font-size:13px">—</span></div>
           <div class="sc-row"><span class="sc-row-label">Income Tax</span><span class="sc-row-val tax-num" id="new-tax">—</span></div>
           <div class="sc-row"><span class="sc-row-label">Rebate u/s 87A</span><span class="sc-row-val green-num" id="new-87a">—</span></div>
@@ -1040,8 +1040,9 @@ function calcOldTax(gross, hraEx, otherEx, pfEmpE, extra80c, npsAmt, d80dSelf, d
   return { taxable, base, rebate, cess, total: base + cess };
 }
 
-function calcNewTax(gross, empNpsAmt) {
-  const taxable = Math.max(0, gross - 75000 - (empNpsAmt||0));
+function calcNewTax(gross, empNpsAmt, newFlexiExempt) {
+  // Under New Regime: Std deduction ₹75K + Employer NPS 80CCD(2) + flexi components marked new:true are tax-exempt
+  const taxable = Math.max(0, gross - 75000 - (empNpsAmt||0) - (newFlexiExempt||0));
   const slabs = [[0,300000,0],[300000,700000,0.05],[700000,1000000,0.10],
                  [1000000,1200000,0.15],[1200000,1500000,0.20],[1500000,Infinity,0.30]];
   let base = 0;
@@ -1502,10 +1503,16 @@ function calcAll() {
   // Pool bar — includes Employer NPS since it's from Flexi Pay
   updatePoolBar(budget.totalUsed, budget.poolMo);
 
-  // Old regime flexi exempt (annual)
+  // Old regime flexi exempt (annual) — all components marked old:true
   let oldFlexiExempt = 0;
   FLEXI_DEF.forEach(f => {
     if (f.old) oldFlexiExempt += ((S.flexi[f.id]||0)*12);
+  });
+
+  // New regime flexi exempt (annual) — only components marked new:true (e.g. Meal/Sodexo, Tele, Health, Fuel, Driver)
+  let newFlexiExempt = 0;
+  FLEXI_DEF.forEach(f => {
+    if (f.new) newFlexiExempt += ((S.flexi[f.id]||0)*12);
   });
 
   const rent   = parseFloat(N('inp-rent')?.value)||0;
@@ -1529,7 +1536,7 @@ function calcAll() {
   updateEmployerNPSLimit();
 
   const OLD = calcOldTax(gross, hraEx, oldFlexiExempt, c.pfEmpE, extra80c, npsAmt, d80dS, d80dP, loan24b, empNpsAmt);
-  const NEW = calcNewTax(gross, empNpsAmt);
+  const NEW = calcNewTax(gross, empNpsAmt, newFlexiExempt);
 
   // Summary panel
   N('old-gross').textContent     = INR(gross);
@@ -1546,6 +1553,7 @@ function calcAll() {
 
   N('new-gross').textContent     = INR(gross);
   if (N('new-emp-nps')) N('new-emp-nps').textContent = empNpsAmt>0 ? `−${INR(empNpsAmt)}` : 'Nil';
+  if (N('new-oex'))     N('new-oex').textContent     = newFlexiExempt>0 ? `−${INR(newFlexiExempt)}` : 'Nil';
   N('new-taxable').textContent   = INR(NEW.taxable);
   N('new-tax').textContent       = NEW.base>0  ? INR(NEW.base)          : '₹0';
   N('new-87a').textContent       = NEW.rebate>0? `−${INR(NEW.rebate)}`  : 'Nil';
@@ -1619,9 +1627,11 @@ async function submitPlan() {
   const loan24b = parseFloat(N('inp-24b')?.value)||0;
   let oldFlexiExempt = 0;
   FLEXI_DEF.forEach(f => { if (f.old) oldFlexiExempt += ((S.flexi[f.id]||0)*12); });
+  let newFlexiExempt = 0;
+  FLEXI_DEF.forEach(f => { if (f.new) newFlexiExempt += ((S.flexi[f.id]||0)*12); });
 
   const OLD = calcOldTax(gross, hraEx, oldFlexiExempt, c.pfEmpE, extra80c, npsAmt, d80dS, d80dP, loan24b, empNpsAmt);
-  const NEW = calcNewTax(gross, empNpsAmt);
+  const NEW = calcNewTax(gross, empNpsAmt, newFlexiExempt);
   const chosenTax = S.regime==='old' ? OLD.total : NEW.total;
 
   const payload = {
