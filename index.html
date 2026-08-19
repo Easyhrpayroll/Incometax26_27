@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="referrer" content="no-referrer"/>
+<title>Tax &amp; Flexi Declaration — FY 2026-27 | Easy Home Finance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#14161a; --ink2:#454b54; --ink3:#767e8a;
+  --paper:#ffffff; --wash:#f6f7f9; --wash2:#eef0f4; --rule:#e2e6ec;
+  --red:#ff1616; --red-d:#c10e0e; --red-w:#fff1f1;
+  --grn:#0f7b4f; --grn-w:#eefaf4;
+  --amb:#b25e00; --amb-w:#fff8ec;
+  --blu:#1d4ed8; --blu-w:#eff4ff;
+  --fd:'Bricolage Grotesque',system-ui,sans-serif;
+  --fb:'Inter',system-ui,sans-serif;
+  --fm:'IBM Plex Mono',ui-monospace,monospace;
+  --r:10px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-text-size-adjust:100%}
+body{font-family:var(--fb);background:var(--wash);color:var(--ink);line-height:1.5;
+  -webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:none}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.num{font-family:var(--fm);font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+.scr{display:none}
+.scr.on{display:block}
+
+/* ── LOGIN ───────────────────────────────── */
+#sc-login{display:none}
+#sc-login.on{min-height:100dvh;display:grid;place-items:center;padding:20px;
+  background:
+   radial-gradient(ellipse 80% 50% at 15% -10%,rgba(255,22,22,.07),transparent 60%),
+   var(--wash)}
+.lg{width:100%;max-width:940px;display:grid;grid-template-columns:1.15fr .95fr;
+  background:var(--paper);border:1px solid var(--rule);border-radius:16px;overflow:hidden;
+  box-shadow:0 24px 60px -20px rgba(20,22,26,.18)}
+.lg-l{padding:44px 42px;background:var(--ink);color:#fff;display:flex;flex-direction:column}
+.lg-mark{display:flex;align-items:center;gap:9px;margin-bottom:auto}
+.lg-mark i{width:11px;height:11px;background:var(--red);border-radius:2px;
+  box-shadow:0 0 0 4px rgba(255,22,22,.2);flex:none}
+.lg-mark span{font-family:var(--fd);font-weight:600;font-size:14px;letter-spacing:.02em}
+.lg-l h1{font-family:var(--fd);font-weight:800;font-size:clamp(30px,4vw,42px);
+  line-height:1.04;letter-spacing:-.025em;margin:52px 0 14px}
+.lg-l h1 em{font-style:normal;color:var(--red);display:block}
+.lg-l p{font-size:13.5px;color:#a8b0bc;max-width:34ch}
+.lg-meta{margin-top:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);
+  display:flex;flex-direction:column;gap:9px}
+.lg-meta div{font-size:12px;color:#8d96a3;display:flex;gap:9px;align-items:baseline}
+.lg-meta b{font-family:var(--fm);font-size:10.5px;color:var(--red);font-weight:500;flex:none}
+.lg-r{padding:44px 40px;display:flex;flex-direction:column;justify-content:center}
+.lg-r h2{font-family:var(--fd);font-weight:600;font-size:22px;letter-spacing:-.02em}
+.lg-r>p{font-size:13px;color:var(--ink3);margin:5px 0 26px}
+.fld{margin-bottom:16px}
+.fld label{display:block;font-size:11px;font-weight:600;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.fld input,.fld select{width:100%;padding:11px 13px;background:var(--paper);
+  border:1.5px solid var(--rule);border-radius:8px;font-size:14.5px;transition:border-color .15s}
+.fld input:focus{outline:none;border-color:var(--red)}
+.pw{position:relative}
+.pw input{padding-right:46px}
+#pw-eye{position:absolute;right:5px;top:50%;transform:translateY(-50%);
+  width:36px;height:36px;display:grid;place-items:center;border-radius:7px;
+  color:var(--ink3);transition:color .15s,background .15s}
+#pw-eye:hover{color:var(--ink);background:var(--wash2)}
+#pw-eye[aria-pressed="true"]{color:var(--red)}
+.fld .help{font-size:11.5px;color:var(--ink3);margin-top:6px;line-height:1.45}
+.fld .help code{font-family:var(--fm);font-size:11px;background:var(--wash2);
+  padding:1px 5px;border-radius:4px;color:var(--ink2)}
+#pass{font-family:var(--fm);letter-spacing:.09em;text-transform:uppercase}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
+  padding:12.5px;background:var(--red);color:#fff;font-weight:600;font-size:14.5px;
+  border-radius:8px;transition:background .15s,transform .1s}
+.btn:hover:not(:disabled){background:var(--red-d)}
+.btn:active:not(:disabled){transform:translateY(1px)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.ghost{background:var(--paper);color:var(--ink2);border:1.5px solid var(--rule);width:auto;padding:10px 18px}
+.btn.ghost:hover{background:var(--wash);border-color:var(--ink3)}
+.btn.w{width:auto;padding:11px 26px}
+.spin{width:15px;height:15px;border:2px solid rgba(255,255,255,.35);
+  border-top-color:#fff;border-radius:50%;animation:sp .6s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.alert{padding:11px 14px;border-radius:8px;font-size:13px;margin-top:14px;display:none}
+.alert.on{display:block}
+.alert.err{background:var(--red-w);border:1px solid #ffc9c9;color:var(--red-d)}
+
+/* ── APP SHELL ───────────────────────────── */
+#sc-app{display:none;min-height:100dvh;flex-direction:column}
+#sc-app.on{display:flex}
+.top{background:var(--paper);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:60}
+.top-in{max-width:1140px;margin:0 auto;padding:0 22px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px}
+.top-mark{display:flex;align-items:center;gap:9px;min-width:0}
+.top-mark i{width:10px;height:10px;background:var(--red);border-radius:2px;flex:none}
+.top-mark span{font-family:var(--fd);font-weight:600;font-size:14.5px;letter-spacing:-.01em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-r{display:flex;align-items:center;gap:14px}
+.who{text-align:right;line-height:1.25;min-width:0}
+.who b{font-size:13px;font-weight:600;display:block;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;max-width:190px}
+.who span{font-family:var(--fm);font-size:11px;color:var(--ink3)}
+.lo{font-size:12.5px;color:var(--ink3);font-weight:500;padding:6px 10px;border-radius:6px}
+.lo:hover{background:var(--wash2);color:var(--ink)}
+
+/* stepper */
+.steps{background:var(--paper);border-bottom:1px solid var(--rule);
+  position:sticky;top:60px;z-index:55}
+.steps-in{max-width:1140px;margin:0 auto;padding:0 22px;display:flex;gap:2px;
+  overflow-x:auto;scrollbar-width:none}
+.steps-in::-webkit-scrollbar{display:none}
+.stp{appearance:none;background:none;border:0;border-radius:0;
+  display:flex;align-items:center;gap:8px;padding:13px 14px 12px;white-space:nowrap;
+  border-bottom:2px solid transparent;font-size:12.5px;color:var(--ink3);font-weight:500;
+  transition:color .15s,border-color .15s;flex:none}
+.stp b{font-family:var(--fm);font-size:10.5px;font-weight:600;width:19px;height:19px;
+  border-radius:50%;display:grid;place-items:center;background:var(--wash2);color:var(--ink3);flex:none}
+.stp.was{color:var(--ink2)} .stp.was b{background:var(--grn-w);color:var(--grn)}
+.stp.now{color:var(--ink);border-bottom-color:var(--red)}
+.stp.now b{background:var(--red);color:#fff}
+.stp:disabled{opacity:.45;cursor:not-allowed}
+
+.wrap{flex:1;max-width:1140px;width:100%;margin:0 auto;padding:26px 22px 40px}
+.hd{margin-bottom:20px}
+.hd .eyebrow{font-family:var(--fm);font-size:11px;font-weight:500;color:var(--red);
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px}
+.hd h2{font-family:var(--fd);font-weight:600;font-size:26px;letter-spacing:-.025em;line-height:1.15}
+.hd p{font-size:13.5px;color:var(--ink2);margin-top:7px;max-width:74ch}
+
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r);
+  padding:20px 22px;margin-bottom:16px}
+.card>h3{font-family:var(--fd);font-weight:600;font-size:16px;letter-spacing:-.015em;
+  margin-bottom:4px;display:flex;align-items:center;gap:9px}
+.card>h3 .tag{font-family:var(--fb);font-size:10.5px;font-weight:600;padding:2.5px 8px;
+  border-radius:20px;letter-spacing:.02em}
+.tag.old{background:var(--amb-w);color:var(--amb)}
+.tag.new{background:var(--blu-w);color:var(--blu)}
+.tag.both{background:var(--grn-w);color:var(--grn)}
+.tag.lock{background:var(--wash2);color:var(--ink3)}
+.card>.sub{font-size:12.5px;color:var(--ink3);margin-bottom:16px}
+
+/* tables */
+.tw{overflow-x:auto;margin:0 -22px;padding:0 22px;scrollbar-width:thin}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-size:10.5px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink3);padding:8px 10px;border-bottom:1.5px solid var(--rule);
+  white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid var(--rule)}
+th.r,td.r{text-align:right}
+tbody tr:hover{background:var(--wash)}
+tr.tot td{font-weight:600;background:var(--wash);border-top:1.5px solid var(--ink3)}
+tr.tot:hover td{background:var(--wash)}
+.mo-act{color:var(--ink)} .mo-prj{color:var(--ink3)}
+.chip{font-family:var(--fm);font-size:9.5px;font-weight:600;padding:2px 6px;border-radius:4px;
+  letter-spacing:.04em;text-transform:uppercase}
+.chip.a{background:var(--grn-w);color:var(--grn)}
+.chip.p{background:var(--wash2);color:var(--ink3)}
+
+/* regime picker */
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.rg-o{border:1.5px solid var(--rule);border-radius:var(--r);padding:18px;cursor:pointer;
+  transition:border-color .15s,background .15s;position:relative;text-align:left;width:100%}
+.rg-o:hover{border-color:var(--ink3)}
+.rg-o.sel{border-color:var(--red);background:var(--red-w)}
+.rg-o h4{font-family:var(--fd);font-weight:600;font-size:16px;margin-bottom:3px}
+.rg-o .cap{font-size:11.5px;color:var(--ink3);margin-bottom:14px}
+.rg-o .amt{font-family:var(--fm);font-size:23px;font-weight:600;letter-spacing:-.02em}
+.rg-o .amtl{font-size:11px;color:var(--ink3);margin-top:2px}
+.rg-o .brk{margin-top:13px;padding-top:12px;border-top:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:5px}
+.rg-o .brk div{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink2)}
+.rg-best{position:absolute;top:-9px;right:14px;background:var(--grn);color:#fff;
+  font-size:10px;font-weight:600;padding:2.5px 9px;border-radius:20px;letter-spacing:.03em}
+
+/* HRA beam — signature element */
+.beam{background:var(--ink);border-radius:var(--r);padding:19px 21px;color:#fff;margin-bottom:16px}
+.beam-t{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:13px;gap:12px}
+.beam-t h4{font-family:var(--fd);font-weight:600;font-size:14.5px}
+.beam-t span{font-family:var(--fm);font-size:11.5px;color:#8d96a3}
+.bar{height:34px;border-radius:6px;overflow:hidden;display:flex;background:#262a31}
+.bar>div{transition:width .35s cubic-bezier(.4,0,.2,1);display:grid;place-items:center;
+  font-family:var(--fm);font-size:10px;font-weight:600;overflow:hidden;white-space:nowrap}
+.bar .b-hra{background:var(--red)}
+.bar .b-flex{background:#4b525c}
+.beam-k{display:flex;gap:18px;margin-top:11px;flex-wrap:wrap}
+.beam-k div{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#a8b0bc}
+.beam-k i{width:9px;height:9px;border-radius:2px;flex:none}
+.beam-warn{margin-top:13px;padding:11px 13px;background:rgba(178,94,0,.16);
+  border:1px solid rgba(255,180,80,.3);border-radius:7px;font-size:12.5px;
+  color:#ffd9a8;line-height:1.5;display:none}
+.beam-warn.on{display:block}
+.beam-warn b{color:#ffb454}
+
+/* flexi rows */
+.fx{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--rule)}
+.fx:last-child{border-bottom:none}
+.fx-i{width:34px;height:34px;border-radius:8px;background:var(--wash2);display:grid;
+  place-items:center;font-size:16px;flex:none}
+.fx-m{flex:1;min-width:0}
+.fx-m b{font-size:13.5px;font-weight:600;display:block}
+.fx-m span{font-size:11.5px;color:var(--ink3)}
+.fx-s{width:145px;flex:none}
+.fx-s select{width:100%;padding:8px 10px;border:1.5px solid var(--rule);border-radius:7px;
+  font-size:13px;font-family:var(--fm);background:var(--paper)}
+.fx-s select:disabled{background:var(--wash2);color:var(--ink3);cursor:not-allowed}
+.fx.locked{opacity:.62}
+.lockmsg{font-size:11px;color:var(--amb);margin-top:3px}
+
+/* declaration grid */
+.dgrid{display:grid;grid-template-columns:1fr 168px;gap:10px 16px;align-items:center}
+.dgrid .dl{font-size:13px;color:var(--ink2);line-height:1.35}
+.dgrid .dl small{display:block;font-size:11px;color:var(--ink3)}
+.dgrid input{width:100%;padding:8px 11px;border:1.5px solid var(--rule);border-radius:7px;
+  font-family:var(--fm);font-size:13px;text-align:right;background:var(--paper)}
+.dgrid input:focus{outline:none;border-color:var(--red)}
+.dgrid input:disabled{background:var(--wash2);color:var(--ink3);cursor:not-allowed}
+.dgrid input.over{border-color:var(--amb);background:var(--amb-w)}
+.dsec{grid-column:1/-1;font-family:var(--fd);font-weight:600;font-size:13px;
+  padding:14px 0 3px;border-bottom:1px solid var(--rule);margin-bottom:5px}
+.dsec:first-child{padding-top:0}
+.capnote{grid-column:1/-1;font-size:11px;color:var(--amb);margin-top:-4px}
+
+/* note strips */
+.note{padding:12px 14px;border-radius:8px;font-size:12.5px;line-height:1.55;margin-bottom:14px}
+.note.i{background:var(--blu-w);border:1px solid #cfe0ff;color:#1e3a8a}
+.note.w{background:var(--amb-w);border:1px solid #ffe0b2;color:#8a4a00}
+.note.g{background:var(--grn-w);border:1px solid #b8e6d0;color:#0b5c3b}
+.note b{font-weight:600}
+
+/* rent */
+.rentrow{display:grid;grid-template-columns:96px 1fr 110px;gap:10px;align-items:center;
+  padding:7px 0;border-bottom:1px solid var(--rule)}
+.rentrow:last-child{border-bottom:none}
+.rentrow .mo{font-family:var(--fm);font-size:12px;color:var(--ink2)}
+.rentrow input{width:100%;padding:7px 10px;border:1.5px solid var(--rule);border-radius:6px;
+  font-family:var(--fm);font-size:12.5px;text-align:right}
+.rentrow .ex{font-family:var(--fm);font-size:12px;color:var(--grn);text-align:right}
+.rentrow.pre{opacity:.6}
+
+/* nav */
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:22px;
+  padding-top:18px;border-top:1px solid var(--rule)}
+.savepill{font-size:12px;color:var(--grn);display:flex;align-items:center;gap:6px;
+  opacity:0;transition:opacity .3s}
+.savepill.on{opacity:1}
+
+/* summary sidebar */
+.two{display:grid;grid-template-columns:1fr 316px;gap:18px;align-items:start}
+.side{position:sticky;top:130px;display:flex;flex-direction:column;gap:14px}
+.mini{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r);padding:17px 18px}
+.mini h4{font-family:var(--fd);font-weight:600;font-size:13.5px;margin-bottom:12px;
+  display:flex;justify-content:space-between;align-items:baseline}
+.mini h4 span{font-family:var(--fm);font-size:10.5px;font-weight:500;color:var(--ink3);
+  text-transform:uppercase;letter-spacing:.05em}
+.mr{display:flex;justify-content:space-between;gap:10px;padding:5px 0;font-size:12.5px}
+.mr span{color:var(--ink2)} .mr b{font-family:var(--fm);font-weight:500}
+.mr.hi{border-top:1.5px solid var(--rule);margin-top:7px;padding-top:9px;font-size:14px}
+.mr.hi b{font-weight:600;color:var(--red)}
+.mr.sv b{color:var(--grn)}
+
+/* done */
+.done{max-width:640px;margin:70px auto;text-align:center;background:var(--paper);
+  border:1px solid var(--rule);border-radius:16px;padding:48px 40px}
+.done-i{width:56px;height:56px;border-radius:50%;background:var(--grn-w);color:var(--grn);
+  display:grid;place-items:center;margin:0 auto 20px;font-size:26px}
+.done h2{font-family:var(--fd);font-weight:600;font-size:24px;letter-spacing:-.02em;margin-bottom:9px}
+.done p{font-size:13.5px;color:var(--ink2);margin-bottom:24px}
+.done .rec{background:var(--wash);border-radius:8px;padding:14px 16px;text-align:left;
+  display:flex;flex-direction:column;gap:7px;margin-bottom:22px}
+.done .rec div{display:flex;justify-content:space-between;font-size:12.5px}
+.done .rec b{font-family:var(--fm);font-weight:500}
+
+@media(max-width:900px){
+  .lg{grid-template-columns:1fr;max-width:460px}
+  .lg-l{padding:34px 30px} .lg-l h1{margin:34px 0 12px} .lg-r{padding:32px 30px}
+  .lg-meta{margin-top:24px}
+  .two{grid-template-columns:1fr} .side{position:static}
+  .rg{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  html{font-size:14px}
+  .wrap{padding:20px 15px 34px} .card{padding:17px 15px} .tw{margin:0 -15px;padding:0 15px}
+  .top-in,.steps-in{padding:0 15px}
+  .dgrid{grid-template-columns:1fr;gap:5px 0}
+  .dgrid input{text-align:left}
+  .fx{flex-wrap:wrap} .fx-s{width:100%}
+  .rentrow{grid-template-columns:74px 1fr;gap:8px}
+  .rentrow .ex{grid-column:2;text-align:left}
+  .who b{max-width:120px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ LOGIN ══════════ -->
+<section id="sc-login" class="scr on">
+  <div class="lg">
+    <div class="lg-l">
+      <div class="lg-mark"><i></i><span>Easy Home Finance</span></div>
+      <h1>Plan your tax<em>before payroll does.</em></h1>
+      <p>Check what you've been paid, confirm your investments, and set your flexi choices for the rest of the year.</p>
+      <div class="lg-meta">
+        <div><b>FY</b> 2026-27 &middot; Assessment Year 2027-28</div>
+        <div><b>OPEN</b> Declarations close before the next payroll cut-off</div>
+        <div><b>SAVE</b> Nothing is recorded until you confirm on the last step</div>
+      </div>
+    </div>
+    <div class="lg-r">
+      <h2>Sign in</h2>
+      <p>Use your employee code and personal passcode.</p>
+      <div class="fld">
+        <label for="code">Employee code</label>
+        <input id="code" type="text" inputmode="numeric" autocomplete="off" placeholder="5001"/>
+      </div>
+      <div class="fld">
+        <label for="pass">Passcode</label>
+        <div class="pw">
+          <input id="pass" type="password" autocomplete="off" placeholder="ABCD01011990" maxlength="12"/>
+          <button type="button" id="pw-eye" aria-label="Show passcode" aria-pressed="false" title="Show passcode">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+                 stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <g id="eye-open"><path d="M1.8 12S5.5 5 12 5s10.2 7 10.2 7-3.7 7-10.2 7S1.8 12 1.8 12Z"/><circle cx="12" cy="12" r="3.1"/></g>
+              <g id="eye-shut" style="display:none"><path d="M9.9 5.2A9.6 9.6 0 0 1 12 5c6.5 0 10.2 7 10.2 7a17.6 17.6 0 0 1-3.4 4.3M6.2 6.3A17.4 17.4 0 0 0 1.8 12S5.5 19 12 19a9.5 9.5 0 0 0 4-.85"/><path d="M10.1 10.2a3.1 3.1 0 0 0 4.3 4.4"/><path d="m3 3 18 18"/></g>
+            </svg>
+          </button>
+        </div>
+        <div class="help">First <b>4 characters of your PAN</b> followed by your <b>date of birth</b> as <code>DDMMYYYY</code>. PAN <code>ABCDE1234F</code> born 1 Jan 1990 &rarr; <code>ABCD01011990</code>.</div>
+      </div>
+      <button class="btn" id="btn-in"><span id="in-t">Sign in</span></button>
+      <div class="alert err" id="lg-err"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ APP ══════════ -->
+<section id="sc-app" class="scr">
+  <header class="top">
+    <div class="top-in">
+      <div class="top-mark"><i></i><span>Tax &amp; Flexi Declaration</span></div>
+      <div class="top-r">
+        <div class="who"><b id="w-name">—</b><span id="w-code">—</span></div>
+        <button class="lo" id="btn-out">Sign out</button>
+      </div>
+    </div>
+  </header>
+  <nav class="steps"><div class="steps-in" id="steps"></div></nav>
+  <main class="wrap" id="stage"></main>
+</section>
+
+<script>
+"use strict";
+/* ════════════════════════════════════════════════════════════
+   CONFIG
+   ════════════════════════════════════════════════════════════ */
+const API = ''; // ← paste the Apps Script /exec URL here. Empty = demo data.
+
+/* ════════════════════════════════════════════════════════════
+   TAX ENGINE — FY 2026-27 (AY 2027-28)
+   ════════════════════════════════════════════════════════════ */
+const NEW_SLABS=[[0,400000,0],[400000,800000,.05],[800000,1200000,.10],
+  [1200000,1600000,.15],[1600000,2000000,.20],[2000000,2400000,.25],[2400000,Infinity,.30]];
+const OLD_SLABS=[[0,250000,0],[250000,500000,.05],[500000,1000000,.20],[1000000,Infinity,.30]];
+
+function slabTax(t,S){let x=0;for(const[lo,hi,r]of S){if(t>lo)x+=(Math.min(t,hi)-lo)*r}return x}
+
+function scRate(inc,reg){
+  if(reg==='new'){if(inc>2e7)return .25;if(inc>1e7)return .15;if(inc>5e6)return .10;return 0}
+  if(inc>5e7)return .37;if(inc>2e7)return .25;if(inc>1e7)return .15;if(inc>5e6)return .10;return 0;
+}
+function surcharge(taxable,base,reg){
+  const rate=scRate(taxable,reg); if(!rate)return 0;
+  let sc=base*rate;
+  const th=reg==='new'?[5e6,1e7,2e7]:[5e6,1e7,2e7,5e7];
+  const T=th.filter(t=>taxable>t).pop();
+  const S=reg==='new'?NEW_SLABS:OLD_SLABS;
+  const taxAtT=slabTax(T,S), scAtT=taxAtT*scRate(T-1,reg);
+  const cap=taxAtT+scAtT+(taxable-T);
+  if(base+sc>cap)sc=Math.max(0,cap-base);
+  return sc;
+}
+function calcNew(taxable){
+  taxable=Math.max(0,Math.round(taxable));
+  let base=slabTax(taxable,NEW_SLABS),rebate=0,relief=0;
+  if(taxable<=1200000){rebate=Math.min(base,60000);base-=rebate}
+  else{const ex=taxable-1200000;if(base>ex){relief=base-ex;base=ex}}
+  const sc=surcharge(taxable,base,'new'),cess=(base+sc)*.04;
+  return{taxable,base,rebate,relief,sc,cess,total:Math.round(base+sc+cess)};
+}
+function calcOld(taxable){
+  taxable=Math.max(0,Math.round(taxable));
+  let base=slabTax(taxable,OLD_SLABS),rebate=0;
+  if(taxable<=500000){rebate=Math.min(base,12500);base-=rebate}
+  const sc=surcharge(taxable,base,'old'),cess=(base+sc)*.04;
+  return{taxable,base,rebate,relief:0,sc,cess,total:Math.round(base+sc+cess)};
+}
+/* HRA least-of-three, per month */
+function hraMonth(hraRecd,basic,rent,metro){
+  if(!rent||rent<=0)return 0;
+  return Math.max(0,Math.min(hraRecd, Math.max(0,rent-basic*.10), basic*(metro?.50:.40)));
+}
+
+/* ════════════════════════════════════════════════════════════
+   FLEXI SLABS — 7 bands. Band 0 (<12L) gets nothing.
+   ════════════════════════════════════════════════════════════ */
+const BANDS=['Below ₹12L','₹12–18L','₹18–25L','₹25–35L','₹35–50L','₹50–70L','₹70L+'];
+function bandOf(afp){
+  if(afp<1200000)return 0; if(afp<1800000)return 1; if(afp<2500000)return 2;
+  if(afp<3500000)return 3; if(afp<5000000)return 4; if(afp<7000000)return 5; return 6;
+}
+const FLEXI=[
+  {id:'meal',  n:'Meal / Food card',        i:'🍽️',old:1,new:1,s:[0,4000,8800,8800,8800,8800,8800]},
+  {id:'tele',  n:'Telecom & data',          i:'📱',old:1,new:1,s:[0,2000,3000,4000,5000,6000,6000]},
+  {id:'health',n:'Health & wellness',       i:'🏥',old:1,new:1,s:[0,5000,10000,14000,18000,20000,20000]},
+  {id:'fuel',  n:'Fuel',                    i:'⛽',old:1,new:1,s:[0,6000,12000,22000,30000,40000,45000]},
+  {id:'driver',n:'Driver salary',           i:'🚗',old:1,new:1,s:[0,0,0,10000,15000,20000,25000]},
+  {id:'lta',   n:'Leave travel allowance',  i:'✈️',old:1,new:0,s:[0,6000,6000,8000,10000,10000,10000]},
+  {id:'wear',  n:'Office wear',             i:'👔',old:1,new:0,s:[0,3500,3500,5000,6500,8000,8000]},
+  {id:'books', n:'Books & periodicals',     i:'📚',old:1,new:0,s:[0,3000,3000,4500,5500,6000,6000]},
+  {id:'lnd',   n:'Learning & development',  i:'🎓',old:1,new:0,s:[0,4000,4000,6000,8000,10000,10000]},
+];
+/* Sodexo in CTC is a single pooled amount covering several heads. The employee
+   allocates it; each head is capped by its band ceiling, and the total by the pool. */
+function poolUsed(exceptId){
+  return FLEXI.reduce((a,f)=>a+(f.id===exceptId?0:num(S.flexi[f.id])),0);
+}
+function poolLeft(){ return Math.max(0, num(S.pool) - poolUsed(null)); }
+
+/* Ladder of choices when the ceiling comes from the employee's own pool. */
+function poolOpts(max,cur){
+  const step = max>20000?5000:(max>8000?2000:1000);
+  const out=[0];
+  for(let v=step; v<=max; v+=step) out.push(v);
+  if(max>0 && out[out.length-1]!==max) out.push(max);
+  if(cur>0 && out.indexOf(cur)<0) out.push(cur);
+  return [...new Set(out)].sort((a,b)=>a-b);
+}
+
+function optsFor(f,b){
+  const seen=new Set([0]),out=[0];
+  for(let i=1;i<=b;i++){const v=f.s[i];if(v>0&&!seen.has(v)){seen.add(v);out.push(v)}}
+  return out.sort((a,b)=>a-b);
+}
+
+/* ════════════════════════════════════════════════════════════
+   DECLARATION HEADS — maps to HRMS bulk upload columns
+   ════════════════════════════════════════════════════════════ */
+const HEADS=[
+  {g:'Section 80C — combined limit ₹1,50,000'},
+  {k:'lip',   n:'Life insurance premium',                col:'Life Insurance Premium [LIP]'},
+  {k:'ppf',   n:'Public Provident Fund (PPF)',           col:'Public Provident Fund [PPF]'},
+  {k:'elss',  n:'ELSS mutual funds',                     col:'ELSS Investment in the Unit of Government approved plan framed under equity Linked Saving Scheme (For Self Only)'},
+  {k:'nsc',   n:'National Savings Certificate',          col:'Subscription to National Saving Certificate [NSC] VII Issue'},
+  {k:'ulip',  n:'Unit linked plan (ULIP)',               col:'Unit Linked Plan [ULIP]'},
+  {k:'fd5',   n:'5-year tax saving FD / POTD',           col:'Tax Saving Fixed Deposit [5 Years and above] or 5 Year Post Office Time Deposit [POTD] Scheme'},
+  {k:'hlp',   n:'Home loan principal repaid',            col:'Housing. Loan [Principal Repayment]'},
+  {k:'sip',   n:'SIP with 3-year lock-in',               col:'SIP - more than 3 years lock in period'},
+  {k:'ssa',   n:'Sukanya Samriddhi account',             col:'Sukanya Samriddhi Account'},
+  {k:'stamp', n:'Stamp duty & registration',             col:'Stamp Duty & Registration Charges'},
+  {k:'tuit',  n:'Children\u2019s tuition fee',           col:'Children\u2019s Tuition Fee'},
+  {k:'pens',  n:'Pension plan (insurer / MF)',           col:'Pension Plan from Insurance Companies/Mutual Funds'},
+  {k:'nps80c',n:'National Pension Scheme (80CCD1)',      col:'New Pension Scheme [NPS]'},
+  {k:'scss',  n:'Senior citizens savings scheme',        col:'Senior Citizen\u2019s Saving Scheme [SCSS]'},
+  {k:'kvp',   n:'Kisan Vikas Patra',                     col:'Kisan Vikas Patra (KVP)'},
+  {k:'infra', n:'Long term infrastructure bonds',        col:'Long term Infrastructure Bonds'},
+  {k:'pmsby', n:'Pradhan Mantri Suraksha Bima Yojana',   col:'Pradhan Mantri Suraksha Bima Yojana'},
+
+  {g:'Additional NPS'},
+  {k:'nps1b', n:'NPS 80CCD(1B)', sub:'Over and above 80C', cap:50000,
+   col:'(80CCD(1B)) Sec 124(3) - Contribution under National Pension Scheme (Max ₹50,000)'},
+
+  {g:'Health insurance — Section 80D'},
+  {k:'d80self',n:'Self, spouse & children',   cap:25000, col:'(80D) Sec 126 - Medical Insurance Premium, Preventive Health Check-up for Individual, Spouse & children'},
+  {k:'d80par', n:'Parents (below 60)',        cap:25000, col:'(80D) Sec 126 - Medical Insurance Premium, Preventive Health Check-up for Parents not being Sr. Citizens'},
+  {k:'d80sr',  n:'Parents (senior citizens)', cap:50000, col:'(80D) Sec 126 - Medical Insurance Premium, Preventive Health Check-up for Parents are Sr. Citizens'},
+
+  {g:'House property'},
+  {k:'int24',  n:'Interest on self-occupied home loan', sub:'Section 24(b), max ₹2,00,000', cap:200000,
+   col:'Interest paid on self-occupied property'},
+  {k:'letInc', n:'Income from let-out property',  col:'Income from let-out property'},
+  {k:'letInt', n:'Interest paid, let-out property',col:'Interest paid for let-out property'},
+  {k:'letTax', n:'Municipal tax paid, let-out',   col:'House government/municipal tax paid (let-out property)'},
+
+  {g:'Other deductions'},
+  {k:'d80e',  n:'Interest on education loan (80E)', col:'(80E) Sec 129 - Payment of interest on the loan for higher education. (Deduction allowed in Initial Assessment Year and 7 preceding years)'},
+  {k:'d80tta',n:'Savings bank interest (80TTA)', cap:10000, col:'(80TTA) Sec 153 - Deduction in respect of interest on deposits in savings account'},
+  {k:'d80eeb',n:'Interest on electric vehicle loan (80EEB)', col:'(80EEB) Sec 132 - Payment of interest on loan for purchase of Electric Vehicle'},
+  {k:'d80ddb',n:'Specified disease treatment (80DDB, below 60)', col:'(80DDB) Sec 128 - Medical treatment for self/dependents of specified diseases (Below 60 years)'},
+  {k:'d80dd', n:'Disabled dependent, 40–80% (80DD)', col:'(80DD) Sec 127 - Medical treatment for handicapped dependent - Disability between 40% to 80%'},
+  {k:'d80u',  n:'Own disability, below 80% (80U)', col:'(80U) Sec 154 - Permanent physical disability for tax assessee only (Person with General Disability below 80%)'},
+
+  {g:'Donations — locked'},
+  {k:'don100',n:'Donation (100% deductible)', lock:1, col:'Donation (Upto 100%)'},
+  {k:'don50', n:'Donation (50% deductible)',  lock:1, col:'Donation (Upto 50%) - consider 50% of amount filled for calculations'},
+];
+const C80=['lip','ppf','elss','nsc','ulip','fd5','hlp','sip','ssa','stamp','tuit','pens','nps80c','scss','kvp','infra','pmsby'];
+
+/* ════════════════════════════════════════════════════════════
+   HELPERS
+   ════════════════════════════════════════════════════════════ */
+const $=id=>document.getElementById(id);
+const MONTHS=['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'];
+const MYR   =[2026,2026,2026,2026,2026,2026,2026,2026,2026,2027,2027,2027];
+const MNUM  =[4,5,6,7,8,9,10,11,12,1,2,3];
+function inr(n){
+  n=Math.round(Number(n)||0);
+  const s=n<0?'-':''; n=Math.abs(n);
+  const t=String(n); if(t.length<=3)return s+'₹'+t;
+  const last3=t.slice(-3); let rest=t.slice(0,-3);
+  rest=rest.replace(/\B(?=(\d{2})+(?!\d))/g,',');
+  return s+'₹'+rest+','+last3;
+}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function num(v){const n=parseFloat(String(v).replace(/[^0-9.\-]/g,''));return isNaN(n)?0:n}
+
+/* ════════════════════════════════════════════════════════════
+   STATE — in memory only. No localStorage, no sessionStorage,
+   no URL routing. Closing or duplicating the tab loses it all,
+   which is exactly what we want.
+   ════════════════════════════════════════════════════════════ */
+let S=null;
+let TOKEN=null;
+
+function blankState(emp){
+  const decl={}; HEADS.forEach(h=>{if(h.k)decl[h.k]=num(emp.decl&&emp.decl[h.k])});
+  const rent=[]; for(let i=0;i<12;i++)rent.push(0);
+  return {
+    emp, decl,
+    regime: emp.regime==='new'?'new':'old',
+    flexi: Object.fromEntries(FLEXI.map(f=>[f.id, num(emp.flexi&&emp.flexi[f.id])])),
+    npsAmt: num(emp.npsAmt)||0,
+    pool: num(emp.sodexoPool)||0,
+    poolNow: num(emp.sodexoNow)||0,
+    rent, metro: emp.metro!=='N', metroSet: !!emp.metroKnown, sameRent:true, baseRent:0,
+    landlord:{name:emp.landlordName||'',pan:emp.landlordPan||'',addr:emp.rentAddr||'',
+              city:emp.rentCity||'',pin:emp.rentPin||''},
+    step:0, visited:new Set([0]), saved:false
+  };
+}
+
+/* ── derived pay model ───────────────────────────────────────
+   Basic comes from the master (never assumed at 50%).
+   HRA is the balancing figure: Gross − Basic − flexi − employer NPS.
+   ─────────────────────────────────────────────────────────── */
+function model(){
+  const e=S.emp;
+  const paidN = (e.actuals||[]).filter(Boolean).length;   // real paid months
+  const grossMo = e.monthlyGross;
+  const basicMo = e.monthlyBasic;
+  const b = bandOf(e.annualGross);
+
+  // Every elected component is carved out of HRA regardless of regime —
+  // the salary structure is the structure. Regime only decides what is exempt.
+  let flexMo=0, flexOldMo=0, flexNewMo=0;
+  FLEXI.forEach(f=>{
+    const v=num(S.flexi[f.id]);
+    flexMo += v;
+    if(f.old) flexOldMo += v;
+    if(f.new) flexNewMo += v;
+  });
+
+  // Employer NPS is whatever the employee asks for. The 10%/14% ceiling limits
+  // the 80CCD(2) deduction, not the contribution — anything above is taxable.
+  const npsMo = Math.max(0, num(S.npsAmt));
+  const capOldMo = basicMo*0.10, capNewMo = basicMo*0.14;
+
+  const hraMo = Math.max(0, grossMo - basicMo - flexMo - npsMo);
+  const headroom = Math.max(0, grossMo - basicMo - npsMo);
+
+  // month rows: actuals for paid months, projection after
+  const acts=e.actuals||[];
+  let firstPaid=acts.findIndex(Boolean);
+  if(firstPaid<0) firstPaid=0;         // no payroll yet: project the whole year
+  const rows=[];
+  for(let i=0;i<12;i++){
+    const a = (e.actuals||[])[i];
+    const actual = !!a;               // a June joiner has no April row
+    if(actual){
+      rows.push({m:MONTHS[i],actual:true,basic:num(a.basic),hra:num(a.hra),
+        flex:num(a.flex),nps:num(a.nps),other:num(a.other),
+        gross:num(a.gross),tds:num(a.tds),pt:num(a.pt)});
+    }else if(i < firstPaid){
+      // before the employee's first payroll month — nothing was earned
+      rows.push({m:MONTHS[i],actual:false,pre:true,basic:0,hra:0,flex:0,
+        nps:0,other:0,gross:0,tds:0,pt:0});
+    }else{
+      rows.push({m:MONTHS[i],actual:false,basic:basicMo,hra:hraMo,flex:flexMo,
+        nps:npsMo,other:0,gross:basicMo+hraMo+flexMo+npsMo,tds:0,pt:200});
+    }
+  }
+  const sum=k=>rows.reduce((a,r)=>a+r[k],0);
+  const annual={basic:sum('basic'),hra:sum('hra'),flex:sum('flex'),nps:sum('nps'),
+                other:sum('other'),gross:sum('gross'),pt:sum('pt')};
+  const tdsPaid=rows.filter(r=>r.actual).reduce((a,r)=>a+r.tds,0);
+
+  // HRA exemption, month by month, using each month's own basic & HRA
+  let hraEx=0;
+  for(let i=0;i<12;i++){
+    const r=rows[i], rent=num(S.rent[i]);
+    hraEx += hraMonth(r.hra, r.basic, rent, S.metro);
+  }
+
+  // PF: employee share 12% of basic (statutory), used for 80C
+  const pfEmp = Math.round(annual.basic*0.12);
+
+  // ── 7.5L employer-contribution perquisite test ──
+  const pfEmployer = Math.round(annual.basic*0.12);
+  const combined = pfEmployer + annual.nps;      // + superannuation if any
+  const perquisite = Math.max(0, combined - 750000);
+
+  return {rows,annual,tdsPaid,hraEx,pfEmp,npsMo,hraMo,flexMo,basicMo,grossMo,
+          flexOldMo,flexNewMo,capOldMo,capNewMo,
+          headroom,band:b,perquisite,combined,paidN};
+}
+
+/* ── tax under both regimes ─────────────────────────────── */
+function taxBoth(M){
+  const d=S.decl;
+
+  // employer NPS deductible under 80CCD(2): 10% of Basic (old) / 14% (new).
+  const npsDedOld = Math.min(M.annual.nps, M.annual.basic*0.10);
+  const npsDedNew = Math.min(M.annual.nps, M.annual.basic*0.14);
+
+  // OLD REGIME
+  const c80 = Math.min(C80.reduce((a,k)=>a+num(d[k]),0)+M.pfEmp,150000);
+  const oldDed =
+      50000
+    + M.hraEx + M.flexOldMo*12
+    + Math.min(num(d.nps1b),50000)
+    + Math.min(num(d.d80self),25000)
+    + Math.min(num(d.d80par),25000)
+    + Math.min(num(d.d80sr),50000)
+    + Math.min(num(d.int24),200000)
+    + num(d.d80e) + Math.min(num(d.d80tta),10000)
+    + num(d.d80eeb) + num(d.d80ddb) + num(d.d80dd) + num(d.d80u)
+    + num(d.don100) + num(d.don50)*0.5
+    + c80 + M.annual.pt + npsDedOld;
+  const OLD = calcOld(M.annual.gross + M.perquisite - oldDed);
+
+  // NEW REGIME — standard deduction, employer NPS, and only the flexi
+  // components that survive the new regime. Everything else is ignored.
+  const newDed = 75000 + npsDedNew + M.flexNewMo*12;
+  const NEW = calcNew(M.annual.gross + M.perquisite - newDed);
+
+  return {OLD,NEW,c80,oldDed,newDed,npsDedOld,npsDedNew};
+}
+
+/* ════════════════════════════════════════════════════════════
+   AUTH
+   ════════════════════════════════════════════════════════════ */
+function showErr(m){const e=$('lg-err');e.textContent=m;e.classList.add('on')}
+function hideErr(){$('lg-err').classList.remove('on')}
+function busy(on){
+  const b=$('btn-in');b.disabled=on;
+  $('in-t').innerHTML=on?'<span class="spin"></span>':'Sign in';
+}
+function jsonp(url){
+  return new Promise((res,rej)=>{
+    const cb='_cb'+Math.random().toString(36).slice(2);
+    const s=document.createElement('script');
+    const t=setTimeout(()=>{clean();rej(new Error('The server did not respond. Check your connection and try again.'))},20000);
+    function clean(){clearTimeout(t);delete window[cb];s.remove()}
+    window[cb]=d=>{clean();res(d)};
+    s.onerror=()=>{clean();rej(new Error('Could not reach the server.'))};
+    s.src=url+(url.includes('?')?'&':'?')+'callback='+cb;
+    document.head.appendChild(s);
+  });
+}
+async function signIn(){
+  const code=$('code').value.trim();
+  const pass=$('pass').value.trim().toUpperCase();
+  if(!code){showErr('Enter your employee code.');return}
+  if(!/^[A-Z]{4}\d{8}$/.test(pass)){
+    showErr('Passcode must be 4 PAN letters followed by 8 date digits, like ABCD01011990.');return;
+  }
+  hideErr();busy(true);
+  try{
+    let d;
+    if(!API){ d=demoPayload(code,pass); }
+    else{
+      d=await jsonp(API+'?action=login&code='+encodeURIComponent(code)+'&p='+encodeURIComponent(pass));
+    }
+    if(!d||d.status!=='ok'){showErr((d&&d.message)||'Employee code or passcode is incorrect.');busy(false);return}
+    TOKEN=d.token||null;
+    S=blankState(d.emp);
+    seedRent();
+    $('sc-login').classList.remove('on');
+    $('sc-app').classList.add('on');
+    $('w-name').textContent=d.emp.name;
+    $('w-code').textContent=d.emp.code+' · '+(d.emp.location||'');
+    go(0);
+  }catch(e){showErr(e.message||'Sign in failed.')}
+  busy(false);
+}
+function signOut(){
+  S=null;TOKEN=null;
+  $('sc-app').classList.remove('on');
+  $('sc-login').classList.add('on');
+  $('code').value='';$('pass').value='';hideErr();
+  $('stage').innerHTML='';
+}
+
+/* rent months start from April 2026 or month of joining, whichever is later */
+function rentWindow(){
+  const doj=S.emp.doj?new Date(S.emp.doj):null;
+  let start=0;
+  if(doj&&!isNaN(doj)){
+    const y=doj.getFullYear(),m=doj.getMonth()+1;
+    if(y>2026||(y===2026&&m>4)){
+      for(let i=0;i<12;i++){ if(MYR[i]===y&&MNUM[i]===m){start=i;break} }
+      if(y>2026)start=Math.max(start,9);
+    }
+  }
+  return start;
+}
+function seedRent(){
+  const st=rentWindow();
+  const ex=S.emp.rentExisting||[];
+  for(let i=0;i<12;i++) S.rent[i] = i<st?0:num(ex[i]);
+  const first=S.rent.slice(st).find(v=>v>0)||0;
+  S.baseRent=first;
+}
+
+/* ════════════════════════════════════════════════════════════
+   NAVIGATION
+   ════════════════════════════════════════════════════════════ */
+const STEPS=[
+  {t:'Your pay',     r:()=>scPay()},
+  {t:'Investments',  r:()=>scDecl()},
+  {t:'House rent',   r:()=>scRent()},
+  {t:'Flexi & NPS',  r:()=>scFlexi()},
+  {t:'Review & save',r:()=>scReview()},
+];
+function go(i){
+  if(!S)return;
+  S.step=i;S.visited.add(i);
+  drawSteps();
+  $('stage').innerHTML=STEPS[i].r();
+  bind(i);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function drawSteps(){
+  $('steps').innerHTML=STEPS.map((s,i)=>{
+    const cls=i===S.step?'now':(S.visited.has(i)?'was':'');
+    const ok=S.visited.has(i)||i<=Math.max(...S.visited);
+    return `<button class="stp ${cls}" data-go="${i}" ${ok?'':'disabled'}>
+      <b>${i+1}</b>${esc(s.t)}</button>`;
+  }).join('');
+  document.querySelectorAll('[data-go]').forEach(b=>{
+    b.onclick=()=>{const i=+b.dataset.go; if(S.visited.has(i)||i<=Math.max(...S.visited))go(i)};
+  });
+}
+function navBar(back,next,label){
+  return `<div class="nav">
+    <div>${back!==null?`<button class="btn ghost" data-nav="${back}">Back</button>`:''}</div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <span class="savepill" id="pill">✓ Kept on this device</span>
+      ${next!==null?`<button class="btn w" data-nav="${next}">${esc(label||'Continue')}</button>`:''}
+    </div></div>`;
+}
+function bindNav(){
+  document.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>go(+b.dataset.nav));
+}
+function pill(){const p=$('pill');if(!p)return;p.classList.add('on');
+  clearTimeout(pill._t);pill._t=setTimeout(()=>p.classList.remove('on'),1800)}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN 1 — YOUR PAY
+   ════════════════════════════════════════════════════════════ */
+function scPay(){
+  const M=model(),e=S.emp;
+  const rows=M.rows.map((r,i)=>r.pre?`<tr style="opacity:.45">
+    <td class="mo-prj"><b>${r.m}</b> <span class="chip p">not employed</span></td>
+    <td class="r num">\u2014</td><td class="r num">\u2014</td><td class="r num">\u2014</td>
+    <td class="r num">\u2014</td><td class="r num">\u2014</td><td class="r num">\u2014</td></tr>`
+  :`<tr>
+    <td class="${r.actual?'mo-act':'mo-prj'}"><b>${r.m}</b>
+      <span class="chip ${r.actual?'a':'p'}">${r.actual?'paid':'projected'}</span></td>
+    <td class="r num">${inr(r.basic)}</td>
+    <td class="r num">${inr(r.hra)}</td>
+    <td class="r num">${inr(r.flex)}</td>
+    <td class="r num">${inr(r.nps)}</td>
+    <td class="r num">${inr(r.gross)}</td>
+    <td class="r num">${r.actual?inr(r.tds):'—'}</td></tr>`).join('');
+  const a=M.annual;
+  return `<div class="hd">
+      <div class="eyebrow">Step 1 of 5</div>
+      <h2>What you've been paid, and what's coming</h2>
+      <p>The first ${M.paidN} months are actuals from payroll. The rest is a projection that will update as you make choices in the later steps.</p>
+    </div>
+    <div class="card">
+      <h3>Monthly pay — FY 2026-27</h3>
+      <div class="sub">Annual fixed pay ${inr(e.annualGross)} &middot; Band ${esc(BANDS[M.band])}</div>
+      <div class="tw"><table>
+        <thead><tr><th>Month</th><th class="r">Basic</th><th class="r">HRA</th>
+          <th class="r">Sodexo total</th><th class="r">Employer NPS</th><th class="r">Gross</th><th class="r">TDS</th></tr></thead>
+        <tbody>${rows}</tbody>
+        <tfoot><tr class="tot">
+          <td>Year total</td><td class="r num">${inr(a.basic)}</td><td class="r num">${inr(a.hra)}</td>
+          <td class="r num">${inr(a.flex)}</td><td class="r num">${inr(a.nps)}</td>
+          <td class="r num">${inr(a.gross)}</td><td class="r num">${inr(M.tdsPaid)}</td></tr></tfoot>
+      </table></div>
+    </div>
+    <div class="note i">Your <b>Basic is fixed</b> at ${inr(M.basicMo)} a month. Everything you elect in the flexi step is carved out of <b>HRA</b>, which acts as the balancing figure so your gross pay never changes.</div>
+    ${navBar(null,1)}`;
+}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN 2 — INVESTMENT DECLARATIONS
+   ════════════════════════════════════════════════════════════ */
+function scDecl(){
+  const M=model();
+  const c80now=C80.reduce((a,k)=>a+num(S.decl[k]),0)+M.pfEmp;
+  let html=HEADS.map(h=>{
+    if(h.g)return `<div class="dsec">${esc(h.g)}</div>`;
+    const v=num(S.decl[h.k]);
+    const over=h.cap&&v>h.cap;
+    return `<div class="dl">${esc(h.n)}${h.sub?`<small>${esc(h.sub)}</small>`:''}${h.lock?'<small>Locked — contact HR to change</small>':''}</div>
+      <div><input type="text" inputmode="numeric" data-d="${h.k}" value="${v||''}" placeholder="0"
+        class="${over?'over':''}" ${h.lock?'disabled':''}/></div>
+      ${over?`<div class="capnote">Above the ₹${h.cap.toLocaleString('en-IN')} limit — only the limit will be allowed.</div>`:''}`;
+  }).join('');
+  return `<div class="hd">
+      <div class="eyebrow">Step 2 of 5</div>
+      <h2>Confirm your investments</h2>
+      <p>These are the figures currently on record for you. Correct anything that has changed — you can leave the rest as it is.</p>
+    </div>
+    ${S.regime==='new'?`<div class="note w">You've chosen the <b>new regime</b>, where these deductions don't reduce your tax. Fill them in anyway if you might switch back at filing.</div>`:''}
+    <div class="card">
+      <h3>Declared amounts</h3>
+      <div class="sub">Your PF contribution of ${inr(M.pfEmp)} is already counted inside the 80C limit.</div>
+      <div class="dgrid">${html}</div>
+    </div>
+    <div class="note ${c80now>150000?'g':'i'}">
+      80C used: <b class="num">${inr(Math.min(c80now,150000))}</b> of ₹1,50,000${c80now>150000?` — you're ${inr(c80now-150000)} over the limit, so the excess won't reduce your tax.`:` — ${inr(150000-c80now)} of headroom left.`}
+    </div>
+    ${navBar(0,2)}`;
+}
+
+/* Validation for the rent declaration. Anyone claiming HRA exemption must give
+   a complete landlord record — an incomplete one gets the claim disallowed at
+   assessment and lands the employee with a demand notice. */
+function rentErrors(){
+  const e={}, L=S.landlord;
+  const annual=S.rent.reduce((a,v)=>a+num(v),0);
+  if(annual<=0) return {errs:e, annual:0, any:false};
+
+  if(!String(L.city||'').trim())  e.city='Enter the city where you rent.';
+  if(!String(L.addr||'').trim())  e.addr='Enter the address of the rented property.';
+  else if(String(L.addr).trim().length<10) e.addr='Give the full address \u2014 flat, building and area.';
+
+  const pin=String(L.pin||'').replace(/\D/g,'');
+  if(!pin) e.pin='Enter the pincode.';
+  else if(pin.length!==6) e.pin='A pincode is 6 digits.';
+
+  if(!String(L.name||'').trim()) e.name='Enter your landlord\u2019s name.';
+  else if(String(L.name).trim().length<3) e.name='Enter the landlord\u2019s full name.';
+
+  const pan=String(L.pan||'').trim().toUpperCase();
+  if(annual>100000){
+    if(!pan) e.pan='Landlord PAN is mandatory once yearly rent crosses \u20b91,00,000.';
+    else if(!/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(pan)) e.pan='That isn\u2019t a valid PAN. The format is ABCDE1234F.';
+  } else if(pan && !/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(pan)){
+    e.pan='That isn\u2019t a valid PAN. The format is ABCDE1234F.';
+  }
+  if(!S.metroSet) e.metro='Confirm whether this is a metro city \u2014 it changes the exemption.';
+  return {errs:e, annual, any:Object.keys(e).length>0};
+}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN 3 — HOUSE RENT
+   ════════════════════════════════════════════════════════════ */
+function scRent(){
+  const M=model(),st=rentWindow();
+  const rows=M.rows.map((r,i)=>{
+    if(i<st)return `<div class="rentrow pre"><span class="mo">${r.m} ${MYR[i]}</span>
+      <span style="font-size:11.5px;color:var(--ink3)">Before your joining date</span><span></span></div>`;
+    const ex=hraMonth(r.hra,r.basic,num(S.rent[i]),S.metro);
+    return `<div class="rentrow"><span class="mo">${r.m} ${MYR[i]}</span>
+      <input type="text" inputmode="numeric" data-rent="${i}" value="${num(S.rent[i])||''}" placeholder="0"/>
+      <span class="ex num">${ex>0?inr(ex):'—'}</span></div>`;
+  }).join('');
+  const annualRent=S.rent.reduce((a,v)=>a+num(v),0);
+  const L=S.landlord;
+  const V=rentErrors();
+  const E=V.errs;
+  const bad=k=>E[k]?' style="border-color:var(--red);background:var(--red-w)"':'';
+  const msg=k=>E[k]?`<div class="capnote" style="color:var(--red)">${esc(E[k])}</div>`:'';
+
+  return `<div class="hd">
+      <div class="eyebrow">Step 3 of 5</div>
+      <h2>House rent you pay</h2>
+      <p>Rent is recorded month by month from ${MONTHS[st]} ${MYR[st]} to March 2027. Enter what you pay each month and we\u2019ll work out the exemption.</p>
+    </div>
+    ${S.regime==='new'?`<div class="note w">HRA exemption isn\u2019t available under the new regime. You can still record your rent here so the figures are ready if you switch.</div>`:''}
+    ${V.annual>0&&V.any?`<div class="note w"><b>Complete your landlord details.</b> An incomplete rent declaration gets the exemption disallowed at assessment, so every field below is needed before you can continue.</div>`:''}
+    <div class="card">
+      <h3>Rent details</h3>
+      <div class="sub">Correct anything that looks wrong \u2014 the records we hold may be incomplete.</div>
+      <div class="dgrid" style="margin-bottom:16px">
+        <div class="dl">City where you rent${V.annual>0?' <span style="color:var(--red)">*</span>':''}</div>
+        <div><input type="text" data-l="city" value="${esc(L.city)}" style="text-align:left" placeholder="Mumbai"${bad('city')}/></div>
+        ${msg('city')}
+
+        <div class="dl">Is this a metro city?<small>Delhi, Mumbai, Kolkata or Chennai only \u2014 it changes the exemption from 40% to 50% of Basic</small></div>
+        <div><select data-metro style="width:100%;padding:8px 11px;border:1.5px solid ${E.metro?'var(--red)':'var(--rule)'};border-radius:7px;font-size:13px">
+          <option value="" ${!S.metroSet?'selected':''}>Select\u2026</option>
+          <option value="Y" ${S.metroSet&&S.metro?'selected':''}>Yes \u2014 50% of Basic</option>
+          <option value="N" ${S.metroSet&&!S.metro?'selected':''}>No \u2014 40% of Basic</option></select></div>
+        ${msg('metro')}
+
+        <div class="dl">Rented address${V.annual>0?' <span style="color:var(--red)">*</span>':''}<small>Flat / house number, building, area</small></div>
+        <div><input type="text" data-l="addr" value="${esc(L.addr)}" style="text-align:left" placeholder="402, Benson, Saibaba Road, Santacruz West"${bad('addr')}/></div>
+        ${msg('addr')}
+
+        <div class="dl">Pincode${V.annual>0?' <span style="color:var(--red)">*</span>':''}</div>
+        <div><input type="text" inputmode="numeric" data-l="pin" value="${esc(L.pin)}" placeholder="400054" maxlength="6"${bad('pin')}/></div>
+        ${msg('pin')}
+
+        <div class="dl">Landlord name${V.annual>0?' <span style="color:var(--red)">*</span>':''}</div>
+        <div><input type="text" data-l="name" value="${esc(L.name)}" style="text-align:left" placeholder="Full name"${bad('name')}/></div>
+        ${msg('name')}
+
+        <div class="dl">Landlord PAN${V.annual>100000?' <span style="color:var(--red)">*</span>':''}
+          <small>Mandatory once yearly rent crosses \u20b91,00,000</small></div>
+        <div><input type="text" data-l="pan" value="${esc(L.pan)}" placeholder="ABCDE1234F"
+          style="text-transform:uppercase" maxlength="10"${bad('pan')}/></div>
+        ${msg('pan')}
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:12px 0;border-top:1px solid var(--rule)">
+        <input type="text" inputmode="numeric" id="baseRent" value="${S.baseRent||''}" placeholder="Monthly rent"
+          style="width:150px;padding:8px 11px;border:1.5px solid var(--rule);border-radius:7px;font-family:var(--fm);font-size:13px;text-align:right"/>
+        <button class="btn ghost" id="applyAll">Use this for every month</button>
+      </div>
+      <div id="rentrows">${rows}</div>
+    </div>
+    <div class="note g">Exemption for the year: <b class="num">${inr(M.hraEx)}</b> on rent of ${inr(V.annual)}. This is the least of HRA received, rent minus 10% of Basic, and ${S.metro?'50':'40'}% of Basic \u2014 worked out separately for each month.</div>
+    ${navBar(1, V.any?null:3)}
+    ${V.any?`<div style="text-align:right;margin-top:-12px"><span style="font-size:12.5px;color:var(--red)">Fill the fields marked above to continue.</span></div>`:''}`;
+}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN 4 — FLEXI & NPS  (signature: the HRA beam)
+   ════════════════════════════════════════════════════════════ */
+function scFlexi(){
+  const M=model(), b=M.band;
+  const hasPool=num(S.pool)>0;
+  const used=poolUsed(null), left=Math.max(0,num(S.pool)-used);
+
+  // what the exemption would be if nothing were elected — the cost of electing
+  const noFlexHra=Math.max(0,M.grossMo-M.basicMo-M.npsMo);
+  let exNow=0,exIfNone=0;
+  for(let i=0;i<12;i++){
+    const r=M.rows[i],rent=num(S.rent[i]);
+    exNow    += hraMonth(r.hra,r.basic,rent,S.metro);
+    exIfNone += hraMonth(r.actual?r.hra:noFlexHra,r.basic,rent,S.metro);
+  }
+  const exLost=Math.max(0,exIfNone-exNow);
+  const above=M.grossMo-M.basicMo;
+  const flexPct=above>0?Math.min(100,(M.flexMo+M.npsMo)/above*100):0;
+  const hraPct=Math.max(0,100-flexPct);
+
+  const row=f=>{
+    const cur=num(S.flexi[f.id]);
+    /* The per-employee Sodexo limit from CTC is authoritative. The band table is
+       only a fallback for anyone without one — using it as a hard ceiling locked
+       21 employees out of amounts they already draw. */
+    const ceiling = hasPool ? Math.max(num(S.pool), cur) : f.s[b];
+    const avail=hasPool ? Math.min(ceiling, num(S.pool)-poolUsed(f.id)) : ceiling;
+    const max=Math.max(0, avail);
+    const opts=(hasPool?poolOpts(max,cur):optsFor(f,b).filter(o=>o<=max||o===cur));
+    const overSlab=cur>ceiling;
+    let note='';
+    if(max===0)      note='<div class="lockmsg">Not offered in your band</div>';
+    else if(overSlab)note=`<div class="lockmsg">You already draw ${inr(cur)} — above your band ceiling of ${inr(max)}, so this can\u2019t be changed here.</div>`;
+    const sel=overSlab
+      ? `<select disabled><option>${inr(cur)}</option></select>`
+      : `<select data-fx="${f.id}" ${ceiling===0?'disabled':''}>
+          ${opts.map(o=>`<option value="${o}" ${o===cur?'selected':''}>${o===0?'Not opted':inr(o)+' / month'}</option>`).join('')}
+        </select>`;
+    return `<div class="fx ${ceiling===0||overSlab?'locked':''}">
+      <div class="fx-i">${f.i}</div>
+      <div class="fx-m"><b>${esc(f.n)}</b>
+        ${f.new?'':'<span class="tag old" style="margin-left:6px">Old regime only</span>'}
+        <span>${ceiling>0?'Up to '+inr(ceiling)+' a month in your band':'\u2014'}</span>${note}</div>
+      <div class="fx-s">${sel}</div></div>`;
+  };
+  const both=FLEXI.filter(f=>f.new).map(row).join('');
+  const oldOnly=FLEXI.filter(f=>!f.new).map(row).join('');
+
+  // NPS ceilings
+  const npsMo=M.npsMo;
+  const overOld=Math.max(0,npsMo-M.capOldMo), overNew=Math.max(0,npsMo-M.capNewMo);
+  const pfYear=Math.round(M.annual.basic*0.12);
+  const room75=Math.max(0,(750000-pfYear)/12);
+
+  return `<div class="hd">
+      <div class="eyebrow">Step 4 of 5</div>
+      <h2>Set your flexi choices and NPS</h2>
+      <p>Everything you pick here comes out of your HRA. Your gross pay doesn\u2019t change \u2014 only how it\u2019s split. You\u2019ll choose your tax regime at the end, once you can see what these choices produce.</p>
+    </div>
+
+    <div class="beam">
+      <div class="beam-t"><h4>Where your monthly pay above Basic goes</h4>
+        <span>${inr(above)} to allocate</span></div>
+      <div class="bar">
+        <div class="b-hra" style="width:${hraPct}%">${hraPct>16?'HRA '+inr(M.hraMo):''}</div>
+        <div class="b-flex" style="width:${flexPct}%">${flexPct>16?'Flexi &amp; NPS '+inr(M.flexMo+M.npsMo):''}</div>
+      </div>
+      <div class="beam-k">
+        <div><i style="background:var(--red)"></i>HRA ${inr(M.hraMo)}/mo</div>
+        <div><i style="background:#4b525c"></i>Flexi &amp; NPS ${inr(M.flexMo+M.npsMo)}/mo</div>
+        <div><i style="background:#262a31"></i>Basic ${inr(M.basicMo)}/mo (fixed)</div>
+      </div>
+      <div class="beam-warn ${exLost>0?'on':''}">
+        These choices pull your HRA down to <b>${inr(M.hraMo)}</b> a month. Because your rent exemption is capped by the HRA you actually receive, that costs you <b>${inr(exLost)}</b> of exemption over the year \u2014 and only if you end up on the old regime. Weigh that against what the benefits save you.
+      </div>
+    </div>
+
+    ${hasPool?`<div class="card">
+      <h3>Your Sodexo allocation</h3>
+      <div class="sub">You currently draw ${inr(S.poolNow)} a month across these heads, and may go up to ${inr(S.pool)}. Each head also has its own band ceiling.</div>
+      <div class="bar" style="background:var(--wash2);height:28px">
+        <div style="width:${num(S.pool)?Math.min(100,used/num(S.pool)*100):0}%;background:var(--red);display:grid;place-items:center;font-family:var(--fm);font-size:10px;font-weight:600;color:#fff">${used>0?inr(used):''}</div>
+      </div>
+      <div style="display:flex;gap:18px;margin-top:10px;flex-wrap:wrap;font-size:12.5px">
+        <span>Pool <b class="num">${inr(S.pool)}</b>/mo</span>
+        <span>Allocated <b class="num">${inr(used)}</b></span>
+        <span style="color:${left>0?'var(--amb)':'var(--grn)'}">Left to allocate <b class="num">${inr(left)}</b></span>
+      </div>
+      ${left>0?`<div class="note w" style="margin:13px 0 0">You still have <b>${inr(left)}</b> a month unallocated. Anything you don\u2019t allocate is paid as taxable allowance, so allocate it if you can use it.</div>`:''}
+    </div>`:''}
+
+    <div class="card">
+      <h3>Reimbursement benefits <span class="tag both">Available in both regimes</span></h3>
+      <div class="sub">${hasPool?`Allocating from your \u20b9${Math.round(num(S.pool)).toLocaleString('en-IN')} pool &middot; band ${esc(BANDS[b])}`:`Band ${esc(BANDS[b])}`} &middot; claim against bills through Pluxee</div>
+      ${b===0?`<div class="note w" style="margin:0">Flexi benefits start at an annual fixed pay of \u20b912,00,000. Nothing is available in your band yet.</div>`:both}
+    </div>
+
+    ${b===0?'':`<div class="card">
+      <h3>Old regime only <span class="tag old">Ignored if you pick the new regime</span></h3>
+      <div class="sub">You can still elect these. If you choose the new regime at the end, the amounts stay in your salary structure but give you no tax relief.</div>
+      ${oldOnly}
+    </div>`}
+
+    <div class="card">
+      <h3>Employer NPS <span class="tag both">Deductible in both regimes</span></h3>
+      <div class="sub">Enter the monthly contribution you want. The deductible ceiling depends on the regime you pick at the end.</div>
+      <div class="fx">
+        <div class="fx-i">\ud83c\udfe6</div>
+        <div class="fx-m"><b>Monthly contribution</b>
+          <span>${inr(npsMo*12)} for the year</span></div>
+        <div class="fx-s">
+          <input type="text" inputmode="numeric" data-nps value="${npsMo||''}" placeholder="0"
+            style="width:100%;padding:8px 10px;border:1.5px solid var(--rule);border-radius:7px;font-family:var(--fm);font-size:13px;text-align:right"/>
+        </div>
+      </div>
+      <div class="tw" style="margin-top:14px"><table>
+        <thead><tr><th>Ceiling</th><th class="r">Per month</th><th class="r">Per year</th><th class="r">Your position</th></tr></thead>
+        <tbody>
+          <tr><td>Old regime \u2014 10% of Basic</td><td class="r num">${inr(M.capOldMo)}</td><td class="r num">${inr(M.capOldMo*12)}</td>
+            <td class="r num" style="color:${overOld>0?'var(--amb)':'var(--grn)'}">${overOld>0?inr(overOld)+' over':'within'}</td></tr>
+          <tr><td>New regime \u2014 14% of Basic</td><td class="r num">${inr(M.capNewMo)}</td><td class="r num">${inr(M.capNewMo*12)}</td>
+            <td class="r num" style="color:${overNew>0?'var(--amb)':'var(--grn)'}">${overNew>0?inr(overNew)+' over':'within'}</td></tr>
+          <tr><td>Before the \u20b97.5L perquisite limit bites<br/><small style="color:var(--ink3)">after your employer PF of ${inr(pfYear)}</small></td>
+            ${room75<=0
+              ? `<td class="r num" colspan="2" style="color:var(--amb)">Already passed by PF alone</td>`
+              : `<td class="r num">${inr(room75)}</td><td class="r num">${inr(room75*12)}</td>`}
+            <td class="r num" style="color:${M.perquisite>0?'var(--amb)':'var(--grn)'}">${M.perquisite>0?inr(M.perquisite)+' taxable':'within'}</td></tr>
+        </tbody></table></div>
+      ${M.perquisite>0?`<div class="note w" style="margin:14px 0 0">Your employer PF and NPS together come to ${inr(M.combined)} for the year. The amount above \u20b97,50,000 \u2014 <b>${inr(M.perquisite)}</b> \u2014 is taxable as a perquisite and has been added to your income.</div>`:''}
+      ${overNew>0?`<div class="note w" style="margin:14px 0 0">You\u2019ve asked for more than 14% of Basic. Anything above the ceiling is still contributed, but it isn\u2019t deductible under 80CCD(2) \u2014 it stays taxable.</div>`:''}
+      <div class="note i" style="margin:14px 0 0">Your HRA after these choices: <b>${inr(M.hraMo)}</b> a month, <b>${inr(M.hraMo*12)}</b> for the year.</div>
+    </div>
+
+    <div class="card">
+      <h3>Also worth looking at <span class="tag lock">Arranged outside payroll</span></h3>
+      <div class="sub">These run through partners directly \u2014 nothing to set here</div>
+      <div class="fx"><div class="fx-i">\ud83d\udcbb</div>
+        <div class="fx-m"><b>Device lease</b>
+          <span>Lease a laptop or phone through the company. Onboard at <a href="https://save.automint.in/onboarding" target="_blank" rel="noopener noreferrer" style="color:var(--red)">save.automint.in/onboarding</a></span></div></div>
+      <div class="fx"><div class="fx-i">\ud83d\ude99</div>
+        <div class="fx-m"><b>Car lease</b>
+          <span>Through Bajaj Finance. Contact <a href="mailto:nikhil.bhosale3@bajajfinserv.in" style="color:var(--red)">nikhil.bhosale3@bajajfinserv.in</a></span></div></div>
+    </div>
+    ${navBar(2,4,'Review')}`;
+}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN 5 — REVIEW, REGIME & SAVE
+   ════════════════════════════════════════════════════════════ */
+function scReview(){
+  const M=model(),T=taxBoth(M);
+  const chosen=S.regime==='old'?T.OLD:T.NEW;
+  const other =S.regime==='old'?T.NEW:T.OLD;
+  const better=T.OLD.total<=T.NEW.total?'old':'new';
+  const gap=Math.abs(T.OLD.total-T.NEW.total);
+  const remaining=12-M.paidN;
+  const balance=Math.max(0,chosen.total-M.tdsPaid);
+  const perMonth=remaining>0?balance/remaining:0;
+  const annualRent=S.rent.reduce((a,v)=>a+num(v),0);
+  const RV=rentErrors();
+  const needPan=RV.any;
+
+  // what the new regime would discard
+  const declTotal=HEADS.filter(h=>h.k).reduce((a,h)=>a+num(S.decl[h.k]),0);
+  const lostFlex=FLEXI.filter(f=>!f.new&&num(S.flexi[f.id])>0);
+  const lostFlexAmt=lostFlex.reduce((a,f)=>a+num(S.flexi[f.id]),0)*12;
+
+  const box=(k,o,title,cap)=>`
+    <button class="rg-o ${S.regime===k?'sel':''}" data-rg="${k}">
+      ${better===k&&gap>0?`<span class="rg-best">Lower by ${inr(gap)}</span>`:''}
+      <h4>${title}</h4><div class="cap">${cap}</div>
+      <div class="amt">${inr(o.total)}</div><div class="amtl">tax for the year</div>
+      <div class="brk">
+        <div><span>Taxable income</span><b class="num">${inr(o.taxable)}</b></div>
+        <div><span>Tax on slabs</span><b class="num">${inr(o.base)}</b></div>
+        ${o.rebate>0?`<div><span>Rebate 87A</span><b class="num">\u2212${inr(o.rebate)}</b></div>`:''}
+        ${o.relief>0?`<div><span>Marginal relief</span><b class="num">\u2212${inr(o.relief)}</b></div>`:''}
+        ${o.sc>0?`<div><span>Surcharge</span><b class="num">${inr(o.sc)}</b></div>`:''}
+        <div><span>Cess 4%</span><b class="num">${inr(o.cess)}</b></div>
+      </div></button>`;
+
+  const flexList=FLEXI.filter(f=>num(S.flexi[f.id])>0)
+    .map(f=>{
+      const dead=S.regime==='new'&&!f.new;
+      return `<div class="mr"><span>${esc(f.n)}${dead?' <span class="tag old">no relief</span>':''}</span>
+        <b class="num"${dead?' style="text-decoration:line-through;color:var(--ink3)"':''}>${inr(S.flexi[f.id])}/mo</b></div>`;
+    }).join('')||'<div class="mr"><span>None selected</span><b>\u2014</b></div>';
+
+  return `<div class="hd">
+      <div class="eyebrow">Step 5 of 5</div>
+      <h2>Choose your regime, then save</h2>
+      <p>Both columns are calculated from everything you\u2019ve entered. Pick one \u2014 nothing is recorded until you save.</p>
+    </div>
+
+    <div class="card">
+      <h3>Which regime do you want for FY 2026-27?</h3>
+      <div class="sub">You can switch again when you file your return in July 2027</div>
+      <div class="rg">
+        ${box('old',T.OLD,'Old regime','Keeps HRA, 80C, 80D and home loan interest')}
+        ${box('new',T.NEW,'New regime','Lower slab rates, \u20b975,000 standard deduction, almost no exemptions')}
+      </div>
+    </div>
+
+    ${S.regime==='new'?`<div class="note w">
+      <b>What choosing the new regime means for what you\u2019ve entered:</b><br/>
+      \u00b7 Your investment declarations${declTotal>0?' totalling '+inr(declTotal):''} give no relief and <b>will not be saved</b> \u2014 the new regime has no place to record them.<br/>
+      \u00b7 Your HRA exemption of ${inr(M.hraEx)} is <b>not available</b>. Rent details are still saved for your record.<br/>
+      ${lostFlex.length?`\u00b7 ${lostFlex.map(f=>esc(f.n)).join(', ')} stay in your salary structure but give <b>no tax relief</b> \u2014 ${inr(lostFlexAmt)} over the year is ignored.<br/>`:''}
+      \u00b7 Employer NPS relief rises to 14% of Basic (${inr(M.capNewMo)} a month).
+    </div>`:`<div class="note g">
+      On the old regime everything you entered counts: investments ${inr(T.c80)} under 80C, HRA exemption ${inr(M.hraEx)}, and all flexi components. Employer NPS relief is capped at 10% of Basic (${inr(M.capOldMo)} a month).
+    </div>`}
+
+    <div class="two">
+      <div>
+        <div class="card"><h3>Tax for the year</h3>
+          <div class="sub">${S.regime==='old'?'Old':'New'} regime, as selected above</div>
+          <div class="mr"><span>Gross salary</span><b class="num">${inr(M.annual.gross)}</b></div>
+          ${M.perquisite>0?`<div class="mr"><span>Taxable perquisite over \u20b97.5L</span><b class="num">${inr(M.perquisite)}</b></div>`:''}
+          <div class="mr"><span>Exemptions and deductions</span><b class="num">\u2212${inr(S.regime==='old'?T.oldDed:T.newDed)}</b></div>
+          <div class="mr"><span>Taxable income</span><b class="num">${inr(chosen.taxable)}</b></div>
+          <div class="mr"><span>Tax on slabs</span><b class="num">${inr(chosen.base)}</b></div>
+          ${chosen.rebate>0?`<div class="mr"><span>Rebate 87A</span><b class="num">\u2212${inr(chosen.rebate)}</b></div>`:''}
+          ${chosen.relief>0?`<div class="mr"><span>Marginal relief</span><b class="num">\u2212${inr(chosen.relief)}</b></div>`:''}
+          ${chosen.sc>0?`<div class="mr"><span>Surcharge</span><b class="num">${inr(chosen.sc)}</b></div>`:''}
+          <div class="mr"><span>Health &amp; education cess</span><b class="num">${inr(chosen.cess)}</b></div>
+          <div class="mr hi"><span>Total tax</span><b class="num">${inr(chosen.total)}</b></div>
+          <div class="mr"><span>Already deducted (${M.paidN} months)</span><b class="num">${inr(M.tdsPaid)}</b></div>
+          <div class="mr"><span>Balance over ${remaining} months</span><b class="num">${inr(balance)}</b></div>
+          <div class="mr hi"><span>TDS from next payroll</span><b class="num">${inr(perMonth)}</b></div>
+        </div>
+        <div class="card"><h3>What you\u2019ve chosen</h3>
+          <div class="mr"><span>Tax regime</span><b>${S.regime==='old'?'Old regime':'New regime'}</b></div>
+          <div class="mr"><span>Employer NPS</span><b class="num">${inr(M.npsMo)}/mo</b></div>
+          <div class="mr"><span>NPS deductible this regime</span><b class="num">${inr(S.regime==='old'?T.npsDedOld:T.npsDedNew)}</b></div>
+          <div class="mr"><span>Monthly HRA after choices</span><b class="num">${inr(M.hraMo)}</b></div>
+          <div class="mr"><span>Monthly rent</span><b class="num">${inr(S.baseRent)}</b></div>
+          <div class="mr"><span>HRA exemption for the year</span><b class="num">${S.regime==='old'?inr(M.hraEx):'Not available'}</b></div>
+          <div style="margin-top:12px;padding-top:11px;border-top:1px solid var(--rule)">${flexList}</div>
+        </div>
+      </div>
+      <aside class="side">
+        <div class="mini"><h4>Regime check <span>compare</span></h4>
+          <div class="mr"><span>Old regime</span><b class="num">${inr(T.OLD.total)}</b></div>
+          <div class="mr"><span>New regime</span><b class="num">${inr(T.NEW.total)}</b></div>
+          <div class="mr ${chosen.total<=other.total?'sv':''} hi">
+            <span>${chosen.total<=other.total?'You picked the lower one':'The other one is lower'}</span>
+            <b class="num">${inr(gap)}</b></div>
+        </div>
+        ${RV.any?`<div class="note w" style="margin:0"><b>Your rent declaration is incomplete.</b><br/>${Object.values(RV.errs).map(x=>'\u00b7 '+esc(x)).join('<br/>')}<br/><br/>Go back to step 3 and complete it \u2014 an incomplete declaration gets the exemption disallowed.</div>`:''}
+        <div class="mini"><h4>Before you save</h4>
+          <p style="font-size:12.5px;color:var(--ink2);line-height:1.55">This replaces your existing declaration for FY 2026-27 and goes to HR for the next payroll run.</p>
+          <button class="btn" id="btn-save" style="margin-top:14px" ${needPan?'disabled':''}>
+            <span id="save-t">Save my declaration</span></button>
+          <div class="alert err" id="sv-err"></div>
+        </div>
+      </aside>
+    </div>
+    ${navBar(3,null)}`;
+}
+
+function scDone(){
+  const M=model(),T=taxBoth(M);
+  const chosen=S.regime==='old'?T.OLD:T.NEW;
+  const remaining=12-M.paidN;
+  const perMonth=remaining>0?Math.max(0,chosen.total-M.tdsPaid)/remaining:0;
+  $('steps').innerHTML='';
+  $('stage').innerHTML=`<div class="done">
+    <div class="done-i">✓</div>
+    <h2>Declaration saved</h2>
+    <p>HR has your choices for FY 2026-27. They'll be applied from the next payroll cycle.</p>
+    <div class="rec">
+      <div><span>Employee</span><b>${esc(S.emp.name)} · ${esc(S.emp.code)}</b></div>
+      <div><span>Tax regime</span><b>${S.regime==='old'?'Old regime':'New regime'}</b></div>
+      <div><span>Tax for the year</span><b>${inr(chosen.total)}</b></div>
+      <div><span>TDS from next payroll</span><b>${inr(perMonth)}</b></div>
+      <div><span>Saved on</span><b>${new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}</b></div>
+    </div>
+    <button class="btn ghost" onclick="window.print()">Print this page</button>
+  </div>`;
+}
+
+/* ════════════════════════════════════════════════════════════
+   BINDINGS — every change is held in memory and re-rendered
+   ════════════════════════════════════════════════════════════ */
+function bind(step){
+  bindNav();
+
+  // Regime is chosen last. Nothing entered earlier is discarded here — the
+  // consequences are shown on screen, and applied only at save.
+  document.querySelectorAll('[data-rg]').forEach(b=>b.onclick=()=>{
+    S.regime=b.dataset.rg; go(4);
+  });
+
+  document.querySelectorAll('[data-d]').forEach(inp=>{
+    inp.onchange=()=>{
+      S.decl[inp.dataset.d]=num(inp.value);
+      pill(); go(1);
+    };
+  });
+
+  document.querySelectorAll('[data-rent]').forEach(inp=>{
+    inp.onchange=()=>{ S.rent[+inp.dataset.rent]=num(inp.value); pill(); go(2); };
+  });
+  document.querySelectorAll('[data-l]').forEach(inp=>{
+    inp.onchange=()=>{
+      let v=inp.value.trim();
+      if(inp.dataset.l==='pan') v=v.toUpperCase();
+      if(inp.dataset.l==='pin') v=v.replace(/\D/g,'').slice(0,6);
+      S.landlord[inp.dataset.l]=v; pill(); go(2);
+    };
+  });
+  const mt=document.querySelector('[data-metro]');
+  if(mt)mt.onchange=()=>{
+    if(mt.value===''){ S.metroSet=false; }
+    else { S.metro=mt.value==='Y'; S.metroSet=true; }
+    pill(); go(2);
+  };
+  const ap=$('applyAll');
+  if(ap)ap.onclick=()=>{
+    const v=num($('baseRent').value); S.baseRent=v;
+    const st=rentWindow();
+    for(let i=st;i<12;i++)S.rent[i]=v;
+    pill(); go(2);
+  };
+
+  document.querySelectorAll('[data-fx]').forEach(sel=>{
+    sel.onchange=()=>{
+      const id=sel.dataset.fx;
+      /* An out-of-range value leaves selectedIndex at -1 and value empty, which
+         would silently zero the component. Revert instead. */
+      if(sel.selectedIndex<0||sel.value===''){ sel.value=String(num(S.flexi[id])); return; }
+      const v=num(sel.value);
+      const M=model(), others=poolUsed(id);
+      if(num(S.pool)>0 && v+others > num(S.pool)){
+        sel.value=String(num(S.flexi[id]));
+        alert('Your Sodexo pool is '+inr(S.pool)+' a month and you have '+inr(num(S.pool)-others)+' left. Reduce another head first.');
+        return;
+      }
+      if(v+others+M.npsMo > M.grossMo-M.basicMo){
+        sel.value=String(num(S.flexi[id]));
+        alert('That would take your flexi total past what\u2019s available above Basic. Reduce another component first.');
+        return;
+      }
+      S.flexi[id]=v; pill(); go(3);
+    };
+  });
+  const np=document.querySelector('[data-nps]');
+  if(np)np.onchange=()=>{
+    const M=model(), want=Math.max(0,num(np.value));
+    const room=M.grossMo-M.basicMo-M.flexMo;      // can't push HRA below zero
+    if(want>room){
+      alert('The most you can put into NPS right now is '+inr(room)+' a month, otherwise your HRA would go below zero. Reduce a flexi component first.');
+      np.value=String(Math.round(M.npsMo)); return;
+    }
+    S.npsAmt=want; pill(); go(3);
+  };
+
+  const sv=$('btn-save');
+  if(sv)sv.onclick=doSave;
+}
+
+/* ════════════════════════════════════════════════════════════
+   SAVE — the only point anything leaves the browser
+   ════════════════════════════════════════════════════════════ */
+function buildPayload(){
+  const M=model(),T=taxBoth(M);
+  const chosen=S.regime==='old'?T.OLD:T.NEW;
+  const remaining=12-M.paidN;
+  const st=rentWindow();
+
+  // 1 — investment declaration row (HRMS bulk upload shape).
+  //     Under the new regime there is nothing to declare, so the row is
+  //     sent blank rather than carrying figures that give no relief.
+  const decl={emp_name:S.emp.name,emp_code:S.emp.code};
+  HEADS.forEach(h=>{ if(h.k) decl[h.col] = S.regime==='new' ? '' : (num(S.decl[h.k])||''); });
+
+  // 2 — HRA rows, one per month from joining/April to March
+  const hra=[];
+  for(let i=st;i<12;i++){
+    if(num(S.rent[i])<=0)continue;
+    hra.push({
+      emp_name:S.emp.name, emp_code:S.emp.code,
+      'From Month (M)':MNUM[i], 'From Year (yyyy)':MYR[i],
+      'End Month (M)':MNUM[i],  'End Year (yyyy)':MYR[i],
+      Address:S.landlord.addr, City:S.landlord.city, Pincode:S.landlord.pin,
+      'Metro (Y/N)':S.metro?'Y':'N', Amount:num(S.rent[i]),
+      'Relationship with Landlord':'', 'Landlord Name':S.landlord.name,
+      'Landlord Address':S.landlord.addr, 'Landlord City':S.landlord.city,
+      'Landlord Pincode':S.landlord.pin, 'Landlord PAN':S.landlord.pan.toUpperCase()
+    });
+  }
+
+  // 3 — regime row
+  const regime={employee_code:S.emp.code,
+    'Tax Regime Name':S.regime==='old'?'Old Tax Regime':'New Tax Regime'};
+
+  // 4 — flexi / payroll instruction
+  const flexi={emp_code:S.emp.code,emp_name:S.emp.name,
+    tax_regime:S.regime==='old'?'Old':'New',
+    monthly_basic:M.basicMo, monthly_hra:Math.round(M.hraMo),
+    employer_nps_monthly:Math.round(M.npsMo),
+    employer_nps_annual:Math.round(M.annual.nps),   // actuals + projection, not rate x 12
+    nps_deductible:Math.round(S.regime==='old'?T.npsDedOld:T.npsDedNew)};
+  FLEXI.forEach(f=>{
+    const v=num(S.flexi[f.id]);
+    flexi[f.n]=v;
+    flexi[f.n+' — tax relief']=(S.regime==='old'?f.old:f.new)?(v>0?'Yes':''):'No relief this regime';
+  });
+
+  return {token:TOKEN,code:S.emp.code,decl,hra,regime,flexi,
+    computed:{regime:S.regime,taxable:chosen.taxable,total_tax:chosen.total,
+      tds_paid:M.tdsPaid,balance:Math.max(0,chosen.total-M.tdsPaid),
+      monthly_tds:remaining>0?Math.round(Math.max(0,chosen.total-M.tdsPaid)/remaining):0,
+      hra_exemption:S.regime==='old'?Math.round(M.hraEx):0,
+      perquisite_over_75L:Math.round(M.perquisite),
+      declarations_saved:S.regime==='old'?'Yes':'No — new regime'}};
+}
+async function doSave(){
+  const b=$('btn-save'),e=$('sv-err');
+  e.classList.remove('on');
+  b.disabled=true;$('save-t').innerHTML='<span class="spin"></span>';
+  try{
+    const p=buildPayload();
+    if(!API){ await new Promise(r=>setTimeout(r,700)); }
+    else{
+      const r=await fetch(API,{method:'POST',redirect:'follow',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body:JSON.stringify(Object.assign({action:'submit'},p))});
+      const d=await r.json();
+      if(!d||d.status!=='ok')throw new Error((d&&d.message)||'The server could not save your declaration.');
+    }
+    S.saved=true; scDone();
+  }catch(err){
+    e.textContent=err.message||'Save failed. Try again in a moment.';
+    e.classList.add('on');
+    b.disabled=false;$('save-t').textContent='Save my declaration';
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   DEMO DATA — used only when API is blank
+   ════════════════════════════════════════════════════════════ */
+function demoPayload(code,pass){
+  const basicMo=82800, grossMo=155664;      // Gross salary, not Monthly Fixed Pay
+  return {status:'ok',token:'demo',emp:{
+    code:code||'5269',name:'Demo Employee',location:'Mumbai',doj:'2021-01-11',
+    monthlyBasic:basicMo,monthlyGross:grossMo,annualGross:1987200,
+    paidMonths:4,
+    actuals:[
+      {basic:82800,hra:46864,flex:17000,nps:9000,other:0,gross:155664,tds:0,pt:200},
+      {basic:82800,hra:46864,flex:17000,nps:9000,other:0,gross:155664,tds:0,pt:200},
+      {basic:82800,hra:46864,flex:17000,nps:9000,other:0,gross:155664,tds:0,pt:200},
+      {basic:82800,hra:46864,flex:17000,nps:9000,other:0,gross:155664,tds:0,pt:200}
+    ],
+    metro:'Y',regime:'old',npsAmt:9000,
+    sodexoNow:17000, sodexoPool:40000,
+    flexi:{meal:4000,fuel:6000,health:5000,tele:2000,driver:0,lta:0,wear:0,books:0,lnd:0},
+    rentExisting:new Array(12).fill(25000),
+    landlordName:'',landlordPan:'',rentAddr:'',rentCity:'Mumbai',rentPin:'',
+    decl:{}
+  }};
+}
+
+/* ════════════════════════════════════════════════════════════
+   BOOT
+   ════════════════════════════════════════════════════════════ */
+/* Show/hide the passcode. Caret position is preserved so toggling mid-entry
+   doesn't jump the cursor to the end. */
+(function(){
+  const eye=$('pw-eye'), inp=$('pass');
+  if(!eye||!inp) return;
+  eye.onclick=()=>{
+    const show = inp.type==='password';
+    const s=inp.selectionStart, e=inp.selectionEnd;
+    inp.type = show ? 'text' : 'password';
+    eye.setAttribute('aria-pressed', show?'true':'false');
+    eye.setAttribute('aria-label', show?'Hide passcode':'Show passcode');
+    eye.setAttribute('title', show?'Hide passcode':'Show passcode');
+    document.getElementById('eye-open').style.display = show?'none':'';
+    document.getElementById('eye-shut').style.display = show?'':'none';
+    inp.focus();
+    try{ inp.setSelectionRange(s,e); }catch(_){}
+  };
+})();
+
+$('btn-in').onclick=signIn;
+$('btn-out').onclick=signOut;
+$('pass').addEventListener('keydown',e=>{if(e.key==='Enter')signIn()});
+$('code').addEventListener('keydown',e=>{if(e.key==='Enter')$('pass').focus()});
+</script>
+</body>
+</html>
